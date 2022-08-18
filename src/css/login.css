@@ -13,6 +13,9 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
 }
+.swal-text{
+	text-align: center;
+}
 h1 {
     font-size: 2.25rem;
     font-weight: 700;

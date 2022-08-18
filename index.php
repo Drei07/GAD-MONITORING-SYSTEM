@@ -43,7 +43,7 @@ include_once 'dashboard/superadmin/controller/select-settings-coniguration-contr
                 </div>
                 <div class="input-container cta">
                     <label for="" class="checkbox-container">
-                        <a href="public/user/forgot-password.php">Forgot Password?</a>
+                        <a href="public/user/forgot-password">Forgot Password?</a>
                     </label>
                 </div>
                 <br>
