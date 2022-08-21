@@ -1,5 +1,6 @@
 
 <?php
+include_once '../../dashboard/superadmin/authentication/superadmin-forgot-password.php';
 include_once '../../dashboard/superadmin/controller/select-settings-coniguration-controller.php';
 ?>
 <!DOCTYPE html>
@@ -23,7 +24,7 @@ include_once '../../dashboard/superadmin/controller/select-settings-coniguration
             </section>
         </div>
         <div class="right">
-            <form action="../../dashboard/user/authentication/user-forgot-password.php" method="POST" class="needs-validation" novalidate="">
+		    <form action="../../dashboard/superadmin/authentication/superadmin-forgot-password.php" method="POST" class="my-login-validation" novalidate="">
                 <section class="copy">
                     <h2>Forgot Password?</h2>
                 <br>
