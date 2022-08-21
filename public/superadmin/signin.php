@@ -13,7 +13,7 @@ include_once '../../dashboard/superadmin/controller/select-settings-coniguration
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://www.google.com/recaptcha/api.js?render=<?php echo $SiteKEY ?>"></script>
     <link rel="stylesheet" href="../../src/css/login.css?v=<?php echo time(); ?>">
-    <title>Superadmin Sign In</title>
+    <title>Admin Sign In</title>
 </head>
 
 <body>
