@@ -1,6 +1,8 @@
 <?php
 include_once __DIR__. '/../../src/API/api.php';
+include_once '../../dashboard/admin/authentication/admin-signin.php';
 include_once '../../dashboard/superadmin/controller/select-settings-coniguration-controller.php';
+
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +27,7 @@ include_once '../../dashboard/superadmin/controller/select-settings-coniguration
             </section>
         </div>
         <div class="right">
-            <form action="" class="needs-validation" method="POST" novalidate="">
+            <form action="../../dashboard/admin/authentication/admin-signin.php" method="POST" class="my-login-validation" novalidate="">
                 <section class="copy">
                     <h2>Sign In</h2>
                 <br>

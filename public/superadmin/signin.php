@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__. '/../../src/API/api.php';
+include_once '../../dashboard/superadmin/authentication/superadmin-signin.php';
 include_once '../../dashboard/superadmin/controller/select-settings-coniguration-controller.php';
 
 ?>
@@ -13,7 +14,7 @@ include_once '../../dashboard/superadmin/controller/select-settings-coniguration
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://www.google.com/recaptcha/api.js?render=<?php echo $SiteKEY ?>"></script>
     <link rel="stylesheet" href="../../src/css/login.css?v=<?php echo time(); ?>">
-    <title>Admin Sign In</title>
+    <title>Superadmin Sign In</title>
 </head>
 
 <body>
@@ -25,7 +26,7 @@ include_once '../../dashboard/superadmin/controller/select-settings-coniguration
             </section>
         </div>
         <div class="right">
-            <form action="" class="needs-validation" method="POST" novalidate="">
+            <form action="../../dashboard/superadmin/authentication/superadmin-signin.php" method="POST" class="my-login-validation" novalidate="">
                 <section class="copy">
                     <h2>Sign In</h2>
                 <br>

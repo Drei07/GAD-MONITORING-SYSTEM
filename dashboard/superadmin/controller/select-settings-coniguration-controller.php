@@ -48,16 +48,16 @@ $google_recaptcha_api_last_update =  $google['updated_at'];
 
 // Superadmin Profile
 
-// $pdoQuery = "SELECT * FROM superadmin LIMIT 1";
-// $pdoResult = $pdoConnect->prepare($pdoQuery);
-// $pdoExec = $pdoResult->execute(array());
-// $superadmin_profile = $pdoResult->fetch(PDO::FETCH_ASSOC);
+$pdoQuery = "SELECT * FROM superadmin LIMIT 1";
+$pdoResult = $pdoConnect->prepare($pdoQuery);
+$pdoExec = $pdoResult->execute(array());
+$superadmin_profile = $pdoResult->fetch(PDO::FETCH_ASSOC);
 
-// $superadmin_name = $superadmin_profile['name'];
-// $superadmin_email = $superadmin_profile['email'];
-// $profile = $superadmin_profile['profile'];
-// $current_password = $superadmin_profile["password"];
-// $superadmin_profile_last_update = $superadmin_profile['updated_at'];
+$superadmin_name = $superadmin_profile['name'];
+$superadmin_email = $superadmin_profile['email'];
+$profile = $superadmin_profile['profile'];
+$current_password = $superadmin_profile["password"];
+$superadmin_profile_last_update = $superadmin_profile['updated_at'];
 
 
 
