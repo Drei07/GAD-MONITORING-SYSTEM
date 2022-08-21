@@ -21,7 +21,6 @@ h1 {
     font-weight: 700;
 }
 h2 {
-    margin-top: 1rem;
     text-align: left;
     font-size: 2rem;
     font-weight: 600;
@@ -128,5 +127,17 @@ label {
         display: flex;
         width: 50%;
         height: auto;
+    }
+}
+@media screen and (max-width: 990px) {
+    h2{
+        margin-top: 2.5rem;
+        font-size: 1.7rem;
+    }
+}
+
+@media screen and (max-width: 570px) {
+    .grecaptcha-badge { 
+        visibility: hidden;
     }
 }

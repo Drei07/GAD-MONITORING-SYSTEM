@@ -30,7 +30,7 @@ include_once '../../dashboard/user/authentication/user-forgot-password.php';
                 </section>
                 <div class="input-container email">
                     <label for="email ">Email</label>
-                    <input type="text" class="form-control" name="email" id="email" required>
+                    <input type="email" class="form-control" name="email" id="email" required>
                 </div>
                 <div class="invalid-feedback">
                     Email is invalid
