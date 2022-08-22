@@ -61,7 +61,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="settings">
           <i class='bx bx-cog'></i>
           <span class="links_name">
             Setting
