@@ -24,7 +24,7 @@ include_once '../../dashboard/superadmin/controller/select-settings-coniguration
             </section>
         </div>
         <div class="right">
-		    <form action="../../dashboard/superadmin/authentication/superadmin-forgot-password.php" method="POST" class="my-login-validation" novalidate="">
+		    <form action="../../dashboard/superadmin/authentication/superadmin-forgot-password.php" method="POST" class="needs-validation" novalidate="">
                 <section class="copy">
                     <h2>Forgot Password?</h2>
                 <br>
@@ -38,7 +38,7 @@ include_once '../../dashboard/superadmin/controller/select-settings-coniguration
                 </div>
                 <div class="input-container cta">
                     <label for="" class="checkbox-container">
-                        <a href="../../">Back to Sign In</a>
+                        <a href="signin">Back to Sign In</a>
                     </label>
                 </div>
                 <br>

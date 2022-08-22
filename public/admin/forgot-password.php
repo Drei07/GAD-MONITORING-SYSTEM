@@ -24,7 +24,7 @@ include_once '../../dashboard/superadmin/controller/select-settings-coniguration
             </section>
         </div>
         <div class="right">
-            <form action="../../dashboard/admin/authentication/admin-forgot-password.php" method="POST" class="my-login-validation" novalidate="">
+            <form action="../../dashboard/admin/authentication/admin-forgot-password.php" method="POST" class="needs-validation" novalidate="">
                 <section class="copy">
                     <h2>Forgot Password?</h2>
                 <br>
@@ -38,7 +38,7 @@ include_once '../../dashboard/superadmin/controller/select-settings-coniguration
                 </div>
                 <div class="input-container cta">
                     <label for="" class="checkbox-container">
-                        <a href="../../">Back to Sign In</a>
+                        <a href="signin">Back to Sign In</a>
                     </label>
                 </div>
                 <br>
@@ -76,23 +76,24 @@ include_once '../../dashboard/superadmin/controller/select-settings-coniguration
 
 	</script>
 
-    <?php
+	<!-- SWEET ALERT -->
+	<?php
 
-    if(isset($_SESSION['status']) && $_SESSION['status'] !='')
-    {
-        ?>
-        <script>
-            swal({
-            title: "<?php echo $_SESSION['status_title']; ?>",
-            text: "<?php echo $_SESSION['status']; ?>",
-            icon: "<?php echo $_SESSION['status_code']; ?>",
-            button: false,
-            timer: <?php echo $_SESSION['status_timer']; ?>,
-            });
-        </script>
-        <?php
-        unset($_SESSION['status']);
-    }
-    ?>
+		if(isset($_SESSION['status']) && $_SESSION['status'] !='')
+		{
+			?>
+			<script>
+				swal({
+				title: "<?php echo $_SESSION['status_title']; ?>",
+				text: "<?php echo $_SESSION['status']; ?>",
+				icon: "<?php echo $_SESSION['status_code']; ?>",
+				button: false,
+				timer: <?php echo $_SESSION['status_timer']; ?>
+				});
+			</script>
+			<?php
+			unset($_SESSION['status']);
+		}
+	?>
 </body>
 </html>
