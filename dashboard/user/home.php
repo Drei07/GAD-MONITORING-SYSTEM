@@ -25,6 +25,7 @@ $profile_user 	= $row['userProfile'];
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="shortcut icon" href="../../src/img/<?php echo $logo ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
   <title>Home</title>
   <!-- box icon -->
@@ -88,7 +89,7 @@ $profile_user 	= $row['userProfile'];
       </div>
       <span class="user_name"><?php echo $row['userLast_Name']; ?>, <?php echo $row['userFirst_Name']; ?></span>
       <div class="user_wrapper">
-        <img src="../../src/img/<?php echo $profile_user  ?>" alt="user-profile">
+        <a href="profile"><img src="../../src/img/<?php echo $profile_user ?>" alt="user-profile" data-toggle="tooltip" data-placement="bottom" title="Profile"></a>
       </div>
     </div>
     <!-- End Top Bar -->
@@ -104,28 +105,28 @@ $profile_user 	= $row['userProfile'];
     <div class="card-boxes">
       <div class="box">
         <div class="right_side">
-          <div class="numbers">9.99</div>
+          <div class="numbers">0</div>
           <div class="box_topic">Total Order</div>
         </div>
         <i class='bx bx-cart-alt'></i>
       </div>
       <div class="box">
         <div class="right_side">
-          <div class="numbers">15.9</div>
+          <div class="numbers">0</div>
           <div class="box_topic">Total Sales</div>
         </div>
         <i class='bx bxs-cart-add'></i>
       </div>
       <div class="box">
         <div class="right_side">
-          <div class="numbers">30.20</div>
+          <div class="numbers">0</div>
           <div class="box_topic">Total Projects</div>
         </div>
         <i class='bx bx-cart'></i>
       </div>
       <div class="box">
         <div class="right_side">
-          <div class="numbers">50.9</div>
+          <div class="numbers">0</div>
           <div class="box_topic">Total Return</div>
         </div>
         <i class='bx bxs-cart-download'></i>
@@ -135,77 +136,14 @@ $profile_user 	= $row['userProfile'];
     <di v class="details">
       <div class="recent_project">
         <div class="card_header">
-          <h2>Lastet Projects</h2>
+          <h2>Reports</h2>
         </div>
        
-      </div>
-      <div class="recent_customers">
-        <div class="card_header">
-          <h2>New Customers</h2>
-        </div>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <div class="info_img">
-                  <img src="../../src/img/avatar-3.jpg" alt="">
-                </div>
-              </td>
-              <td>
-                <h4>Vanessa Tucker</h4>
-                <span>Vanessa@gmail.com</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="info_img">
-                  <img src="../../src/img/avatar-4.jpg" alt="">
-                </div>
-              </td>
-              <td>
-                <h4>Sharon Lessma</h4>
-                <span>Sharon@gmail.com</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="info_img">
-                  <img src="../../src/img/avatar-5.jpg" alt="">
-                </div>
-              </td>
-              <td>
-                <h4>Christina Mason</h4>
-                <span>Christina@gmail.com</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="info_img">
-                  <img src="../../src/img/avatar-2.jpg" alt="">
-                </div>
-              </td>
-              <td>
-                <h4>Willams Harris</h4>
-                <span>Willams@gmail.com</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="info_img">
-                  <img src="../../src/img/avatar-3.jpg" alt="">
-                </div>
-              </td>
-              <td>
-                <h4>Sharon Lessma</h4>
-                <span>Willams@gmail.com</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </section>
 
+    <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>
 
@@ -226,6 +164,11 @@ $profile_user 	= $row['userProfile'];
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
       }
     }
+
+    //Tooltip
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
 
     // Signout
     $('.btn-signout').on('click', function(e){
