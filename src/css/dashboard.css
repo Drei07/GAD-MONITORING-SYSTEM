@@ -235,6 +235,13 @@ ol, ul {
   border: 1px solid var(--red);
   margin-right: 0.5rem;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.tooltip-inner {
+  background-color: var(--red);
+  opacity: 0.9;
+  padding: 2px 15px;
 }
 
 
@@ -423,6 +430,14 @@ ol, ul {
   font-size: 13px;
 }
 
+.details .card_body .row .col-md-12 {
+  padding-bottom: .9rem;
+}
+
+.details .card_body .row .col-md-12 input {
+  font-size: 13px;
+}
+
 .details .card_body .row label span {
   color: red;
   font-size: 13px;
@@ -460,6 +475,65 @@ ol, ul {
   font-size: 13px;
   margin-right: 1.5rem;
 }
+
+/* Profile */
+
+.details .profile {
+	padding: 2rem;
+	display: flex;
+	justify-content: center;
+}
+
+.details .profile .profile-img{
+	display: flex;
+	flex-direction: column;
+	justify-content: top;
+	align-items: center;
+	padding: 2rem;
+	padding-top: 6px;
+	padding-right: 3.5rem;
+}
+
+.details .profile .profile-img img{
+	width: 160px;
+	height: 160px;
+	border-radius: 50%;
+	border: 2px solid var(--gray);
+	margin-bottom: 2rem;
+}
+
+.details .profile .profile-img a{
+  text-decoration: none;
+}
+ 
+.details .profile .profile-img  .delete {
+	position: absolute;
+	margin-top: 140px;
+	display: flex;
+	background-color: var(--red);
+	padding: 13px;
+	border-radius: 50%;
+}
+
+.details .profile .profile-img  .delete i{
+	font-size: 20px;
+	color: var(--white);
+}
+
+
+.details .profile .profile-img button{
+	display: block;
+	text-align: center;
+	font-size: 13px;
+	font-weight: 500;
+	padding: .5rem;
+	margin-bottom: .3rem;
+	margin-top: 1rem;
+	width: 100%;
+	border-radius: 5px;
+	border: none;
+}
+
 
 .bg_worning {
   background: #ffc107;

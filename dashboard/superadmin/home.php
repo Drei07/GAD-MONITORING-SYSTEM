@@ -23,6 +23,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="shortcut icon" href="../../src/img/<?php echo $logo ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
   <title>Home</title>
   <!-- box icon -->
@@ -86,7 +87,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
       </div>
       <span class="user_name"><?php echo $row['name']; ?></span>
       <div class="user_wrapper">
-        <img src="../../src/img/<?php echo $profile ?>" alt="user-profile">
+        <a href="profile"><img src="../../src/img/<?php echo $profile ?>" alt="user-profile" data-toggle="tooltip" data-placement="bottom" title="Profile"></a>
       </div>
     </div>
     <!-- End Top Bar -->
@@ -204,6 +205,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
   </section>
 
+    <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>
 
@@ -224,6 +226,11 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
       }
     }
+
+    //Tooltip
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
 
     // Signout
     $('.btn-signout').on('click', function(e){
