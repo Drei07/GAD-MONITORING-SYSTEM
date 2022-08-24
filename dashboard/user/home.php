@@ -89,7 +89,7 @@ $profile_user 	= $row['userProfile'];
       </div>
       <span class="user_name"><?php echo $row['userLast_Name']; ?>, <?php echo $row['userFirst_Name']; ?></span>
       <div class="user_wrapper">
-        <a href="profile"><img src="../../src/img/<?php echo $profile_user ?>" alt="user-profile" data-toggle="tooltip" data-placement="bottom" title="Profile"></a>
+        <a href="profile"><img src="../../src/img/<?php echo $profile_user ?>" alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
       </div>
     </div>
     <!-- End Top Bar -->
@@ -146,6 +146,7 @@ $profile_user 	= $row['userProfile'];
     <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../src/js/tooltip.js"></script>
 
   <script>
     let sidebar = document.querySelector(".sidebar");
@@ -164,11 +165,6 @@ $profile_user 	= $row['userProfile'];
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
       }
     }
-
-    //Tooltip
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
 
     // Signout
     $('.btn-signout').on('click', function(e){

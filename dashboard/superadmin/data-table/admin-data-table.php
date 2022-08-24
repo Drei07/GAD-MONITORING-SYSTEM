@@ -12,6 +12,8 @@ if(!$superadmin_home->is_logged_in())
 }
 
 
+
+
 function get_total_row($pdoConnect)
 {
 
@@ -31,18 +33,19 @@ else
 }
 
 $query = "
-SELECT * FROM admin WHERE account_status = :status
+SELECT * FROM user WHERE account_status = :status
 ";
 $output = '';
 if($_POST['query'] != '')
 {
   $query .= '
   AND employeeId LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR adminFirst_Name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR adminMiddle_Name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR adminLast_Name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR adminEmail LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR adminStatus LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
+  OR userFirst_Name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
+  OR userMiddle_Name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
+  OR userLast_Name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
+  OR userPhone_Number LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
+  OR userEmail LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
+  OR userStatus LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
   OR tokencode LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
   ';
 }
@@ -66,6 +69,7 @@ $output = '
     <thead>
     <th>EMPLOYEE ID</th>
     <th>NAME</th>
+    <th>PHONE NUMBER</th>
     <th>EMAIL</th>
     <th>STATUS</th>
     <th>DATE</th>
@@ -77,12 +81,12 @@ $output = '
     $output .= '
     <tr>
       <td>'.$row["employeeId"].'</td>
-      <td>'.$row["adminLast_Name"].',&nbsp;&nbsp;'.$row["adminFirst_Name"].'&nbsp;&nbsp;&nbsp;'.$row["adminMiddle_Name"].'</td>
-      <td>'.$row["adminEmail"].'</td>
-      <td>'. ($row['adminStatus']=="N" ? '<p class="P">Pending</p>' :  '<p class="A">Active</p>') . '</td>
+      <td>'.$row["userLast_Name"].',&nbsp;&nbsp;'.$row["userFirst_Name"].'&nbsp;&nbsp;&nbsp;'.$row["userMiddle_Name"].'</td>
+      <td>+63'.$row["userPhone_Number"].'</td>
+      <td>'.$row["userEmail"].'</td>
+      <td>'. ($row['userStatus']=="N" ? '<p class="P">Pending</p>' :  '<p class="A">Active</p>') . '</td>
       <td>'.$row["created_at"].'</td>
-      <td><button type="button" class="btn btn-danger view"> <a href="admin-profile?id='.$row["userId"].'" class="view"><i class="bx bx-low-vision"></i></a></button></td>
-
+      <td><button type="button" class="btn btn-danger view"> <a href="teachers-profile?id='.$row["userId"].'" class="view"><i class="bx bx-low-vision"></i></a></button></td>
     </tr>
     ';
   }
@@ -216,6 +220,7 @@ $output .= '
 echo $output;
 
 ?>
+
 <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 $('.view').on('click', function(e){
@@ -235,6 +240,7 @@ $('.view').on('click', function(e){
         }
       });
 })
+
 
 </script>
 </table>
