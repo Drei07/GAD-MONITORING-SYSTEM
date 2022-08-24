@@ -46,18 +46,26 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-        <a href="#">
-          <i class='bx bx-user'></i>
+        <a href="profile">
+          <i class='bx bxs-user'></i>
           <span class="links_name">
             Profile
           </span>
         </a>
       </li>
       <li>
-        <a href="#">
-          <i class='bx bxs-truck'></i>
+      <a href="admin">
+          <i class='bx bxs-user-pin'></i>
           <span class="links_name">
-            Sales
+            Admin
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="reports">
+          <i class='bx bxs-book'></i>
+          <span class="links_name">
+          Reports
           </span>
         </a>
       </li>
@@ -87,7 +95,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
       </div>
       <span class="user_name"><?php echo $row['name']; ?></span>
       <div class="user_wrapper">
-      <a href="profile"><img src="../../src/img/<?php echo $profile ?>" alt="user-profile" data-toggle="tooltip" data-placement="bottom" title="Profile"></a>
+        <a href="profile"><img src="../../src/img/<?php echo $profile ?>" alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
       </div>
     </div>
     <!-- End Top Bar -->
@@ -244,6 +252,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../src/js/tooltip.js"></script>
 
   <script>
     let sidebar = document.querySelector(".sidebar");
@@ -262,11 +271,6 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
       }
     }
-
-    //Tooltip
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
 
 
     // Signout
