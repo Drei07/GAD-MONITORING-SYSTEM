@@ -1,10 +1,10 @@
 <table class="table table-bordered table-hover">
 <?php
 
-require_once '../authentication/superadmin-class.php';
+require_once '../authentication/user-class.php';
 include_once '../../../database/dbconfig2.php';
 
-$superadmin_home = new SUPERADMIN();
+$superadmin_home = new USER();
 
 if(!$superadmin_home->is_logged_in())
 {
@@ -33,33 +33,26 @@ else
 }
 
 $query = "
-SELECT * FROM user WHERE account_status = :status
+SELECT * FROM guidelines
 ";
 $output = '';
 if($_POST['query'] != '')
 {
   $query .= '
-  AND employeeId LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR userFirst_Name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR userMiddle_Name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR userLast_Name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR userPhone_Number LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR userEmail LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR userStatus LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
-  OR tokencode LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
+  WHERE guidelines_name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
   ';
 }
 
-$query .= 'ORDER BY userId DESC ';
+$query .= 'ORDER BY Id ASC ';
 
 $filter_query = $query . 'LIMIT '.$start.', '.$limit.'';
 
 $statement = $pdoConnect->prepare($query);
-$statement->execute(array(":status" => "active"));
+$statement->execute(array());
 $total_data = $statement->rowCount();
 
 $statement = $pdoConnect->prepare($filter_query);
-$statement->execute(array(":status" => "active"));
+$statement->execute(array());
 $total_filter_data = $statement->rowCount();
 
 if($total_data > 0)
@@ -67,12 +60,7 @@ if($total_data > 0)
 $output = '
 
     <thead>
-    <th>EMPLOYEE ID</th>
-    <th>NAME</th>
-    <th>PHONE NUMBER</th>
-    <th>EMAIL</th>
-    <th>STATUS</th>
-    <th>DATE</th>
+    <th>LIST OF BOXES AND CHECKLISTS</th>
     <th>ACTION</th>
     </thead>
 ';
@@ -80,13 +68,8 @@ $output = '
   {
     $output .= '
     <tr>
-      <td>'.$row["employeeId"].'</td>
-      <td>'.$row["userLast_Name"].',&nbsp;&nbsp;'.$row["userFirst_Name"].'&nbsp;&nbsp;&nbsp;'.$row["userMiddle_Name"].'</td>
-      <td>+63'.$row["userPhone_Number"].'</td>
-      <td>'.$row["userEmail"].'</td>
-      <td>'. ($row['userStatus']=="N" ? '<p class="P">Pending</p>' :  '<p class="A">Active</p>') . '</td>
-      <td>'.$row["created_at"].'</td>
-      <td><button type="button" class="btn btn-danger"> <a href="admin-profile?id='.$row["userId"].'" class="view" style="color: #FFFF;"><i class="bx bx-low-vision"></i></a></button></td>
+      <td>'.$row["guidelines_name"].'</td>
+      <td><button type="button" class="btn btn-danger view"> <a href="teachers-profile" class="view"><i class="bx bx-plus-medical"></i></a></button></td>
     </tr>
     ';
   }
@@ -228,8 +211,8 @@ $('.view').on('click', function(e){
   const href = $(this).attr('href')
 
         swal({
-        title: "View?",
-        text: "Do you want to view more?",
+        title: "Create?",
+        text: "Do you want to create checklists?",
         icon: "info",
         buttons: true,
         dangerMode: true,

@@ -1,21 +1,19 @@
 <?php
 include_once '../../database/dbconfig2.php';
-require_once 'authentication/user-class.php';
-include_once __DIR__ .'/../superadmin/controller/select-settings-coniguration-controller.php';
+require_once 'authentication/superadmin-class.php';
+include_once 'controller/select-settings-coniguration-controller.php';
 
-$user_home = new USER();
 
-if(!$user_home->is_logged_in())
+$superadmin_home = new SUPERADMIN();
+
+if(!$superadmin_home->is_logged_in())
 {
- $user_home->redirect('../../');
+ $superadmin_home->redirect('../../public/superadmin/signin');
 }
 
-$stmt = $user_home->runQuery("SELECT * FROM user WHERE userId=:uid");
-$stmt->execute(array(":uid"=>$_SESSION['userSession']));
+$stmt = $superadmin_home->runQuery("SELECT * FROM superadmin WHERE superadminId=:uid");
+$stmt->execute(array(":uid"=>$_SESSION['superadminSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-$UId 			= $row['userId'];
-$profile_user 	= $row['userProfile'];
 
 ?>
 <!DOCTYPE html>
@@ -27,7 +25,7 @@ $profile_user 	= $row['userProfile'];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
-  <title>Home</title>
+  <title>Guidelines | Add Boxes or Checklist</title>
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -40,7 +38,7 @@ $profile_user 	= $row['userProfile'];
     </div>
     <ul>
       <li>
-        <a href="#" class="active">
+        <a href="home">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">
             Dashboard
@@ -49,9 +47,17 @@ $profile_user 	= $row['userProfile'];
       </li>
       <li>
         <a href="profile">
-          <i class='bx bx-user'></i>
+          <i class='bx bxs-user'></i>
           <span class="links_name">
             Profile
+          </span>
+        </a>
+      </li>
+      <li>
+      <a href="admin">
+          <i class='bx bxs-user-pin'></i>
+          <span class="links_name">
+            Admin
           </span>
         </a>
       </li>
@@ -64,7 +70,15 @@ $profile_user 	= $row['userProfile'];
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="reports">
+          <i class='bx bxs-book'></i>
+          <span class="links_name">
+            Reports
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="settings">
           <i class='bx bx-cog'></i>
           <span class="links_name">
             Setting
@@ -72,7 +86,7 @@ $profile_user 	= $row['userProfile'];
         </a>
       </li>
       <li class="login">
-        <a href="authentication/user-signout" class="btn-signout">
+        <a href="authentication/superadmin-signout.php" class="btn-signout">
           <span class="links_name login_out">
             Signout
           </span>
@@ -87,58 +101,44 @@ $profile_user 	= $row['userProfile'];
       <div class="toggle">
         <i class='bx bx-menu' id="btn"></i>
       </div>
-      <span class="user_name"><?php echo $row['userLast_Name']; ?>, <?php echo $row['userFirst_Name']; ?></span>
+      <span class="user_name"><?php echo $row['name']; ?></span>
       <div class="user_wrapper">
-        <a href="profile"><img src="../../src/img/<?php echo $profile_user ?>" alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
+        <a href="profile"><img src="../../src/img/<?php echo $profile ?>" alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
       </div>
     </div>
     <!-- End Top Bar -->
     <div class="header">
-        <h1 class="title">Dashboard</h1>
+        <h1 class="title">Add Boxes or Checkklist</h1>
         <div class="breadcrumbs">
-            <p><a href="">Home</a></p>
+            <p><a href="home">Home</a></p>
             <p class="divider"> | </p>
-            <p class="active"> Dashboard</p>
+            <p><a href="guidelines">Guidelines</a></p>
+            <p class="divider"> | </p>
+            <p class="active"> Add</p>
         </div>
     </div>
     <!-- Content -->
-    <div class="card-boxes">
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">0</div>
-          <div class="box_topic">Total </div>
-        </div>
-        <i class='bx bx-cart-alt'></i>
-      </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">0</div>
-          <div class="box_topic">Total </div>
-        </div>
-        <i class='bx bxs-cart-add'></i>
-      </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">0</div>
-          <div class="box_topic">Total </div>
-        </div>
-        <i class='bx bx-cart'></i>
-      </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">0</div>
-          <div class="box_topic">Total </div>
-        </div>
-        <i class='bx bxs-cart-download'></i>
-      </div>
-    </div>
-    <!-- End Card Boxs -->
-    <di v class="details">
+    <div class="details">
       <div class="recent_project">
-        <div class="card_header">
-          <h2>Reports</h2>
+        <div class="card_body">
+        <form action="controller/add-guidelines-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
+						<div class="row gx-5 needs-validation">
+
+							<div class="col-md-12">
+								<label for="Guidelines" class="form-label">Add Guidelines<span> *</span></label>
+								<input type="text" class="form-control" autocapitalize="on"  autocomplete="off" name="Guidelines" id="Guidelines" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
+								<div class="invalid-feedback">
+								Please provide a Guidelines.
+								</div>
+							</div>
+
+						</div>
+
+						<div class="addBtn">
+							<button type="submit" class="btn-danger" name="btn-register" id="btn-register" onclick="return IsEmpty(); sexEmpty();">Add</button>
+						</div>
+					</form>
         </div>
-       
       </div>
     </div>
   </section>
@@ -165,6 +165,24 @@ $profile_user 	= $row['userProfile'];
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
       }
     }
+
+    // Form
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+            }, false)
+        })
+    })();
+
 
     // Signout
     $('.btn-signout').on('click', function(e){

@@ -62,15 +62,23 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-        <a href="reports">
-          <i class='bx bxs-book'></i>
+        <a href="guidelines">
+          <i class='bx bxs-book-bookmark'></i>
           <span class="links_name">
-          Reports
+            Guide lines
           </span>
         </a>
       </li>
       <li>
-        <a href="settings   ">
+        <a href="reports">
+          <i class='bx bxs-book'></i>
+          <span class="links_name">
+            Reports
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="settings">
           <i class='bx bx-cog'></i>
           <span class="links_name">
             Setting

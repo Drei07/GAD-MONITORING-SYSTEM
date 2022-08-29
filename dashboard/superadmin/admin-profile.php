@@ -15,6 +15,23 @@ $stmt = $superadmin_home->runQuery("SELECT * FROM superadmin WHERE superadminId=
 $stmt->execute(array(":uid"=>$_SESSION['superadminSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+$employeeId = $_GET["id"];
+
+$pdoQuery = "SELECT * FROM user WHERE userId = :id";
+$pdoResult = $pdoConnect->prepare($pdoQuery);
+$pdoExec = $pdoResult->execute(array(":id"=>$employeeId));
+$employee = $pdoResult->fetch(PDO::FETCH_ASSOC);
+
+$employee_id = $employee["userId"];
+$employee_profile = $employee["userProfile"];
+$employee_Lname = $employee["userLast_Name"];
+$employee_Fname = $employee["userFirst_Name"];
+$employee_Mname = $employee["userMiddle_Name"];
+$employee_Email = $employee["userEmail"];
+$employee_position = $employee["userPosition"];
+$employee_status = $employee["userStatus"];
+$employee_last_update = $employee["updated_at"];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +42,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
-  <title>Profile</title>
+  <title>Admin | Admin Profile</title>
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -46,7 +63,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-        <a href="" class="active">
+        <a href="profile">
           <i class='bx bxs-user'></i>
           <span class="links_name">
             Profile
@@ -54,7 +71,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-      <a href="admin">
+      <a href="admin" class="active">
           <i class='bx bxs-user-pin'></i>
           <span class="links_name">
             Admin
@@ -108,140 +125,98 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
     <!-- End Top Bar -->
     <div class="header">
-        <h1 class="title">Profile</h1>
+        <h1 class="title">Admin Profile</h1>
         <div class="breadcrumbs">
             <p><a href="home">Home</a></p>
             <p class="divider"> | </p>
-            <p class="active"> Profile</p>
+            <p class="active"> Admin Profile</p>
         </div>
     </div>
     <!-- Content -->
     <div class="details">
         <div class="recent_project">
             <div class="card_body profile">
-                <div class="profile-img">
-                    <img src="../../src/img/<?php echo $profile ?>" alt="logo">
+            <div class="profile-img">
+						<img src="../../src/img/<?php echo $employee_profile ?>" alt="logo">
+                        <h5><?php echo $employee_Lname?>, <?php echo $employee_Fname?> <?php echo $employee_Mname?></h5>
+                        <p><?php echo $employeeId ?></p>
+                        <h7><?php echo $employee_position ?></h7>
+                        <?php
+                         echo ($employee_status=="N" ? '<button class="P">Pending</button>' :  '<button class="A">Active</button>')
+                        ?>
+						<button class="delete2"><a href="controller/delete-admin-data-controller.php?Id=<?php echo $employee_id ?>" class="btn-delete">Delete Account</a></button>
 
-                    <a href="controller/delete-profile-controller.php" class="delete"><i class='bx bxs-trash'></i></a>
-                    <button class="btn-success change" onclick="edit()"><i class='bx bxs-edit'></i> Edit Profile</button>
-                    <button class="btn-success change" onclick="avatar()"><i class='bx bxs-user'></i> Change Avatar</button>
-                    <button class="btn-success change" onclick="password()"><i class='bx bxs-key'></i> Change Password</button>
-				</div>
+					</div>
 
-                					
-                <div id="Edit">
-                    <form action="controller/update-profile-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
-                        <div class="row gx-5 needs-validation">
-
-                            <label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 1rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-edit'></i> Edit Profile<p>Last update: <?php  echo $superadmin_profile_last_update  ?></p></label>
-
-                            <div class="col-md-12">
-                                <label for="name" class="form-label">Name<span> *</span></label>
-                                <input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="Name" id="name" required value="<?php  echo $superadmin_name  ?>">
-                                <div class="invalid-feedback">
-                                Please provide a Old Password.
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="email" class="form-label">Email<span> *</span></label>
-                                <input type="email" class="form-control" autocapitalize="off" autocomplete="off" name="Email" id="email" required value="<?php  echo $superadmin_email  ?>">
-                                <div class="invalid-feedback">
-                                Please provide a valid Email.
-                                </div>
-                            </div>
-
-                            <div class="col-md-12" style="opacity: 0;">
-                                <label for="sname" class="form-label">Old Password<span> *</span></label>
-                                <input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="SName" id="sname" required value="<?php  echo $system_name  ?>">
-                                <div class="invalid-feedback">
-                                Please provide a Old Password.
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="addBtn">
-                            <button disabled type="submit" class="btn-danger" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
-                        </div>
-                    </form>
-                </div>
-
-
-                <div id="avatar" style="display: none;">
-					<form action="controller/update-profile-avatar-controller.php" method="POST" enctype="multipart/form-data" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
+					<form action="controller/update-admin-data-controller.php?Id=<?php echo $employee_id ?>" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
 						<div class="row gx-5 needs-validation">
 
-							<label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 1rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-user'></i> Change Avatar<p>Last update: <?php  echo $superadmin_profile_last_update  ?></p></label>
+							<label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 1rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-edit'></i> Admin Information<p>Last update: <?php  echo $employee_last_update  ?></p></label>
 
-							<div class="col-md-12">
-								<label for="logo" class="form-label">Upload Logo<span> *</span></label>
-								<input type="file" class="form-control" name="Logo" id="logo" style="height: 33px ;" required>
+							<div class="col-md-6">
+								<label for="first_name" class="form-label">First Name<span> *</span></label>
+								<input disabled disabled type="text" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="FName" id="first_name" placeholder="<?php echo $employee_Fname ?>" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
 								<div class="invalid-feedback">
-								Please provide a Logo.
+								Please provide a First Name.
 								</div>
 							</div>
 
-							<div class="col-md-12" style="opacity: 0;">
-								<label for="email" class="form-label">Default Email<span> *</span></label>
-								<input type="email" class="form-control" autocapitalize="off" autocomplete="off" name="" id="email" required value="<?php  echo $system_email  ?>">
+							<div class="col-md-6">
+								<label for="middle_name" class="form-label">Middle Name</label>
+								<input disabled type="text" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="MName" id="middle_name" placeholder="<?php echo $employee_Mname ?>" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)">
+								<div class="invalid-feedback">
+								Please provide a Middle Name.
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<label for="last_name" class="form-label">Last Name<span> *</span></label>
+								<input disabled type="text" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="LName" id="last_name" placeholder="<?php echo $employee_Lname ?>" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required >
+								<div class="invalid-feedback">
+								Please provide a Last Name.
+								</div>
+							</div>
+
+                            <div class="col-md-6">
+								<label for="email" class="form-label">Email<span> *</span></label>
+								<input disabled type="email" class="form-control" autocapitalize="off" autocomplete="off" name="Email" id="email" required placeholder="<?php echo $employee_Email ?>">
 								<div class="invalid-feedback">
 								Please provide a valid Email.
 								</div>
 							</div>
 
-							<div class="col-md-12" style="opacity: 0; padding-bottom: 1.3rem;">
-								<label for="sname" class="form-label">Old Password<span> *</span></label>
-								<input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="" id="sname" required value="<?php  echo $system_name  ?>">
+							<div class="col-md-6">
+								<label for="position" class="form-label">Position<span> *</span></label>
+								<input  type="text" class="form-control" autocapitalize="on" maxlength="20" autocomplete="off" name="Position" id="position" value="<?php echo $employee_position ?>" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
 								<div class="invalid-feedback">
-								Please provide a Old Password.
+								Please provide a Position
 								</div>
 							</div>
-						</div>
-
-						<div class="addBtn">
-							<button type="submit" class="btn-danger" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
-						</div>
-					</form>
-				</div>
-
-				<div id="password" style="display: none;">
-					<form action="controller/update-password-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
-						<div class="row gx-5 needs-validation">
-
-							<label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 1rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-key'></i> Change Password<p>Last update: <?php  echo $superadmin_profile_last_update  ?></p></label>
-
-							<div class="col-md-12">
-								<label for="old_pass" class="form-label">Old Password<span> *</span></label>
-								<input type="password" class="form-control" autocapitalize="on" autocomplete="off"  name="Old" id="old_pass" required>
+							
+							<div class="col-md-6">
+								<label for="employee_id" class="form-label">Employee ID<span> *</span></label>
+								<input  type="text" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="EmployeeId" id="employee_id" value="<?php echo $employeeId ?>" required >
 								<div class="invalid-feedback">
-								Please provide a Old Password.
+								Please provide a Employee ID.
 								</div>
 							</div>
 
-							<div class="col-md-12">
-								<label for="new_pass" class="form-label">New Password<span> *</span></label>
-								<input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="New" id="new_pass" required>
+							<div class="col-md-6" style="opacity: 0;">
+								<label for="" class="form-label">Last Name<span> *</span></label>
+								<input disabled type="text" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="" id="" placeholder="<?php echo $employee_Lname ?>" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required >
 								<div class="invalid-feedback">
-								Please provide a New Password.
+								Please provide a Last Name.
 								</div>
 							</div>
 
-							<div class="col-md-12">
-								<label for="confirm_pass" class="form-label">Confirm Password<span> *</span></label>
-								<input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="Confirm" id="confirm_pass" required>
-								<div class="invalid-feedback">
-								Please provide a Confirm Password.
-								</div>
-							</div>
 
 						</div>
 
 						<div class="addBtn">
-							<button type="submit" class="btn-danger" name="btn-update-password" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
+                            <button type="button" onclick="location.href='admin'" class="back">Back</button>
+							<button type="submit" class="btn-danger     primary add" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
 						</div>
 					</form>
-				</div>
             </div> 
         </div>
     </div>

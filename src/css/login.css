@@ -51,7 +51,7 @@ a:hover {
 }
 .left {
     background: url(login.jpg), linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
-    background-size: cover;
+    background-size: cover; 
 }
 .left .copy {
     color: white;
@@ -60,7 +60,8 @@ a:hover {
     -webkit-osx-font-smoothing: grayscale;
 }
 .left p {
-    font-weight: 400;
+    font-weight: 700;
+    font-size: 1.3rem;
 }
 .right .copy {
     color: black;

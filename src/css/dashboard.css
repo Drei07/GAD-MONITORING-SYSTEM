@@ -3,11 +3,12 @@
 :root {
   --red: #c72a2a;
   --white-red: #dc3545;
+  --dark-red: rgb(209, 4, 4);
   --white: #fff;
   --black: #0000;
   --gray: #f5f5f5;
   --dark-active: #15ce1e;
-  --pending: #ffc917;
+  --pending: #ffc917; 
 }
 
 * {
@@ -57,7 +58,7 @@ ol, ul {
 }
 
 .view a{
-	color: var(--light);
+	color: var(--whiter);
 }
 
 /* Add Data */
@@ -90,6 +91,7 @@ ol, ul {
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
 }
+
 
 .sidebar {
   position: fixed;
@@ -425,7 +427,7 @@ ol, ul {
 .details .recent_project,
 .details .recent_customers {
   position: relative;
-  min-height: 330px;
+  min-height: auto;
   padding: 20px;
   background: var(--white);
   border-radius: 10px;
@@ -736,6 +738,67 @@ ol, ul {
 	width: 100%;
 	border-radius: 5px;
 	border: none;
+}
+
+.details .profile .profile-img h5{
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.details .profile .profile-img h7{
+	font-size: 15px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.details .profile .profile-img p{
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
+	color: var(--blue);
+}
+
+.details .profile .profile-img button{
+	display: block;
+	text-align: center;
+	font-size: 13px;
+	font-weight: 500;
+	padding: .5rem;
+	margin-bottom: .3rem;
+	margin-top: 1rem;
+	width: 100%;
+	border-radius: 5px;
+	border: none;
+}
+
+.details .profile .profile-img  .delete {
+	position: absolute;
+	margin-top: 140px;
+	display: flex;
+	background-color: var(--red);
+	padding: 13px;
+	border-radius: 50%;
+}
+
+.details .profile .profile-img  .delete i{
+	font-size: 20px;
+	color: var(--whiter);
+}
+
+.details .profile .profile-img  .delete2{
+	background-color: var(--red);
+
+}
+
+.details .profile .profile-img  .delete2 a{
+	display: flex;
+	justify-content: center;
+	color: var(--white);
+}
+
+.details .profile .profile-img  .delete2:hover {
+	background-color: var(--dark-red);
 }
 
 

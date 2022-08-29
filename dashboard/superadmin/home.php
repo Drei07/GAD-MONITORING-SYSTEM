@@ -38,7 +38,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
     <ul>
       <li>
-        <a href="#" class="active">
+        <a href="" class="active">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">
             Dashboard
@@ -58,6 +58,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
           <i class='bx bxs-user-pin'></i>
           <span class="links_name">
             Admin
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="guidelines">
+          <i class='bx bxs-book-bookmark'></i>
+          <span class="links_name">
+            Guidelines
           </span>
         </a>
       </li>
