@@ -776,6 +776,7 @@ ol, ul {
 	position: absolute;
 	margin-top: 140px;
 	display: flex;
+  color: var(--white);
 	background-color: var(--red);
 	padding: 13px;
 	border-radius: 50%;
