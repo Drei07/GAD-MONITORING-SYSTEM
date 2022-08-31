@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2022 at 02:08 PM
+-- Generation Time: Aug 31, 2022 at 11:36 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -108,6 +108,57 @@ CREATE TABLE `guidelines` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `guidelines`
+--
+
+INSERT INTO `guidelines` (`Id`, `guidelines_name`, `guidelines_Id`, `created_at`, `updated_at`) VALUES
+(1, 'GAD Checklist for Projects Identification', '01940875', '2022-08-30 12:32:15', '2022-08-30 12:34:31'),
+(3, 'GAD Checklist for Designing Projects', '04844155', '2022-08-30 12:36:11', NULL),
+(4, 'GAD checklist for migration', '20410565', '2022-08-31 09:14:52', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guidelines_01940875`
+--
+
+CREATE TABLE `guidelines_01940875` (
+  `Id` int(145) NOT NULL,
+  `userId` varchar(125) DEFAULT NULL,
+  `files` varchar(125) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guidelines_04844155`
+--
+
+CREATE TABLE `guidelines_04844155` (
+  `Id` int(145) NOT NULL,
+  `userId` varchar(125) DEFAULT NULL,
+  `files` varchar(125) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guidelines_20410565`
+--
+
+CREATE TABLE `guidelines_20410565` (
+  `Id` int(145) NOT NULL,
+  `userId` varchar(125) DEFAULT NULL,
+  `files` varchar(125) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- --------------------------------------------------------
 
 --
@@ -130,7 +181,7 @@ CREATE TABLE `superadmin` (
 --
 
 INSERT INTO `superadmin` (`superadminId`, `name`, `email`, `password`, `tokencode`, `profile`, `created_at`, `updated_at`) VALUES
-(1, 'VISCAYNO, ANDREI', 'andrei.m.viscayno@gmail.com', '24b35e91f6650c460b66bceaa1590664', 'cf3d41ef87dbd96fe6b963af1eb9c0f6', 'profile-red.png', '2022-07-03 00:09:13', '2022-08-23 01:06:56');
+(1, 'DABU, JASMINE', 'jasmine.j.dabu@gmail.com', '9f1c95d83da5c8474b0e0ed84e4ed3d5', 'cf3d41ef87dbd96fe6b963af1eb9c0f6', 'avatar-4.jpg', '2022-07-03 00:09:13', '2022-08-31 09:18:44');
 
 -- --------------------------------------------------------
 
@@ -153,7 +204,7 @@ CREATE TABLE `system_config` (
 --
 
 INSERT INTO `system_config` (`Id`, `system_name`, `system_number`, `system_email`, `copy_right`, `created_at`, `updated_at`) VALUES
-(1, 'DHVSU HGDG', '9776621929', 'andrei.m.viscayno@gmail.com', 'Copyright 2022 AMV. All right reserved', '2022-07-08 12:38:28', '2022-08-18 03:23:30');
+(1, 'DHVSU HGDG', '9776621929', 'jasmine.j.dabu@gmail.com', 'Copyright 2022 AMV. All right reserved', '2022-07-08 12:38:28', '2022-08-31 09:19:02');
 
 -- --------------------------------------------------------
 
@@ -247,7 +298,9 @@ INSERT INTO `tb_logs` (`activityId`, `user`, `email`, `activity`, `date`) VALUES
 (51, 'Customer andreishania07012000@gmail.com', 'andreishania07012000@gmail.com', 'Has successfully signed in', '2022-08-30 06:18:18 AM'),
 (52, 'Superadmin andrei.m.viscayno@gmail.com', 'andrei.m.viscayno@gmail.com', 'Has successfully signed in', '2022-08-30 06:52:40 AM'),
 (53, 'Customer andreishania07012000@gmail.com', 'andreishania07012000@gmail.com', 'Has successfully signed in', '2022-08-30 02:48:44 PM'),
-(54, 'Superadmin andrei.m.viscayno@gmail.com', 'andrei.m.viscayno@gmail.com', 'Has successfully signed in', '2022-08-30 02:49:16 PM');
+(54, 'Superadmin andrei.m.viscayno@gmail.com', 'andrei.m.viscayno@gmail.com', 'Has successfully signed in', '2022-08-30 02:49:16 PM'),
+(55, 'Superadmin andrei.m.viscayno@gmail.com', 'andrei.m.viscayno@gmail.com', 'Has successfully signed in', '2022-08-31 05:10:17 PM'),
+(56, 'Customer andreishania07012000@gmail.com', 'andreishania07012000@gmail.com', 'Has successfully signed in', '2022-08-31 05:10:39 PM');
 
 -- --------------------------------------------------------
 
@@ -279,9 +332,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userId`, `employeeId`, `userPosition`, `userFirst_Name`, `userMiddle_Name`, `userLast_Name`, `userPhone_Number`, `userEmail`, `userPassword`, `userStatus`, `tokencode`, `userProfile`, `uniqueID`, `account_status`, `created_at`, `updated_at`) VALUES
-(197, '20183473', 'WEB DEVS', 'ANDREI', 'MANALANSAN', 'VISCAYNO', '9776621929', 'andreishania07012000@gmail.com', '8280cf6cf941dbabb5ebabf6a8016c0f', 'Y', 'b3c2dc375edf8a69d45bcbeac8f805a5', 'profile-red.png', '68414511', 'active', '2022-07-05 11:39:33', '2022-08-29 12:46:49'),
-(200, '208006464', 'WEB DEV', 'ANDREI', 'MANALANSAN', 'VISCAYNO', '9776621929', 'andrei.m.viscayno@gmail.com', '1898e171650e8c36a649fcd6bee08a98', 'Y', 'b2327632b4bca39b42c6808c12de3437', 'profile-red.png', '74743006', 'active', '2022-08-24 10:05:43', '2022-08-24 10:10:30'),
-(201, '2021006164', 'WEB DEV', 'SHANIA', 'MANALANSAN', 'VISCAYNO', '9776621929', 'andrei@gmail.com', '915199ad51c70878c2630ee8b018b69e', 'N', '769514e4c4b35c4284f654b56eb545a6', 'profile-red.png', '04354697', 'active', '2022-08-26 12:34:23', '2022-08-29 13:23:17');
+(197, '20183473', 'WEB DEVS', 'JASMINE', 'JIMENEZ', 'DABU', '9776621929', 'jasmine.j.dabu@gmail.com', '9f1c95d83da5c8474b0e0ed84e4ed3d5', 'Y', 'b3c2dc375edf8a69d45bcbeac8f805a5', 'avatar-3.jpg', '68414511', 'active', '2022-07-05 11:39:33', '2022-08-31 09:21:38');
 
 --
 -- Indexes for dumped tables
@@ -309,6 +360,24 @@ ALTER TABLE `google_recaptcha_api`
 -- Indexes for table `guidelines`
 --
 ALTER TABLE `guidelines`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `guidelines_01940875`
+--
+ALTER TABLE `guidelines_01940875`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `guidelines_04844155`
+--
+ALTER TABLE `guidelines_04844155`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `guidelines_20410565`
+--
+ALTER TABLE `guidelines_20410565`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -367,6 +436,24 @@ ALTER TABLE `google_recaptcha_api`
 -- AUTO_INCREMENT for table `guidelines`
 --
 ALTER TABLE `guidelines`
+  MODIFY `Id` int(145) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `guidelines_01940875`
+--
+ALTER TABLE `guidelines_01940875`
+  MODIFY `Id` int(145) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `guidelines_04844155`
+--
+ALTER TABLE `guidelines_04844155`
+  MODIFY `Id` int(145) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `guidelines_20410565`
+--
+ALTER TABLE `guidelines_20410565`
   MODIFY `Id` int(145) NOT NULL AUTO_INCREMENT;
 
 --
@@ -391,7 +478,7 @@ ALTER TABLE `system_logo`
 -- AUTO_INCREMENT for table `tb_logs`
 --
 ALTER TABLE `tb_logs`
-  MODIFY `activityId` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `activityId` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `user`
