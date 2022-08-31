@@ -199,7 +199,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
                     <div class="col-md-6">
                         <label for="email" class="form-label">Email<span> *</span></label>
-                        <input type="email" class="form-control" autocapitalize="off" autocomplete="off" name="Email" id="email" required placeholder = "<?php  echo $smtp_email  ?>">
+                        <input type="email" class="form-control" autocapitalize="off" autocomplete="off" name="Email" id="email" required placeholder = "jasmine.j.dabu@gmail.com">
                         <div class="invalid-feedback">
                         Please provide a valid Email.
                         </div>

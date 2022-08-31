@@ -169,79 +169,79 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
                 <div id="avatar" style="display: none;">
-					<form action="controller/update-profile-avatar-controller.php" method="POST" enctype="multipart/form-data" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
-						<div class="row gx-5 needs-validation">
+                  <form action="controller/update-profile-avatar-controller.php" method="POST" enctype="multipart/form-data" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
+                    <div class="row gx-5 needs-validation">
 
-							<label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 1rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-user'></i> Change Avatar<p>Last update: <?php  echo $superadmin_profile_last_update  ?></p></label>
+                      <label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 1rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-user'></i> Change Avatar<p>Last update: <?php  echo $superadmin_profile_last_update  ?></p></label>
 
-							<div class="col-md-12">
-								<label for="logo" class="form-label">Upload Logo<span> *</span></label>
-								<input type="file" class="form-control" name="Logo" id="logo" style="height: 33px ;" required>
-								<div class="invalid-feedback">
-								Please provide a Logo.
-								</div>
-							</div>
+                      <div class="col-md-12">
+                        <label for="logo" class="form-label">Upload Logo<span> *</span></label>
+                        <input type="file" class="form-control" name="Logo" id="logo" style="height: 33px ;" required>
+                        <div class="invalid-feedback">
+                        Please provide a Logo.
+                        </div>
+                      </div>
 
-							<div class="col-md-12" style="opacity: 0;">
-								<label for="email" class="form-label">Default Email<span> *</span></label>
-								<input type="email" class="form-control" autocapitalize="off" autocomplete="off" name="" id="email" required value="<?php  echo $system_email  ?>">
-								<div class="invalid-feedback">
-								Please provide a valid Email.
-								</div>
-							</div>
+                      <div class="col-md-12" style="opacity: 0;">
+                        <label for="email" class="form-label">Default Email<span> *</span></label>
+                        <input type="email" class="form-control" autocapitalize="off" autocomplete="off" name="" id="email" required value="<?php  echo $system_email  ?>">
+                        <div class="invalid-feedback">
+                        Please provide a valid Email.
+                        </div>
+                      </div>
 
-							<div class="col-md-12" style="opacity: 0; padding-bottom: 1.3rem;">
-								<label for="sname" class="form-label">Old Password<span> *</span></label>
-								<input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="" id="sname" required value="<?php  echo $system_name  ?>">
-								<div class="invalid-feedback">
-								Please provide a Old Password.
-								</div>
-							</div>
-						</div>
+                      <div class="col-md-12" style="opacity: 0; padding-bottom: 1.3rem;">
+                        <label for="sname" class="form-label">Old Password<span> *</span></label>
+                        <input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="" id="sname" required value="<?php  echo $system_name  ?>">
+                        <div class="invalid-feedback">
+                        Please provide a Old Password.
+                        </div>
+                      </div>
+                    </div>
 
-						<div class="addBtn">
-							<button type="submit" class="btn-danger" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
-						</div>
-					</form>
-				</div>
+                    <div class="addBtn">
+                      <button type="submit" class="btn-danger" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
+                    </div>
+                  </form>
+                </div>
 
-				<div id="password" style="display: none;">
-					<form action="controller/update-password-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
-						<div class="row gx-5 needs-validation">
+                <div id="password" style="display: none;">
+                  <form action="controller/update-password-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
+                    <div class="row gx-5 needs-validation">
 
-							<label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 1rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-key'></i> Change Password<p>Last update: <?php  echo $superadmin_profile_last_update  ?></p></label>
+                      <label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 1rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-key'></i> Change Password<p>Last update: <?php  echo $superadmin_profile_last_update  ?></p></label>
 
-							<div class="col-md-12">
-								<label for="old_pass" class="form-label">Old Password<span> *</span></label>
-								<input type="password" class="form-control" autocapitalize="on" autocomplete="off"  name="Old" id="old_pass" required>
-								<div class="invalid-feedback">
-								Please provide a Old Password.
-								</div>
-							</div>
+                      <div class="col-md-12">
+                        <label for="old_pass" class="form-label">Old Password<span> *</span></label>
+                        <input type="password" class="form-control" autocapitalize="on" autocomplete="off"  name="Old" id="old_pass" required>
+                        <div class="invalid-feedback">
+                        Please provide a Old Password.
+                        </div>
+                      </div>
 
-							<div class="col-md-12">
-								<label for="new_pass" class="form-label">New Password<span> *</span></label>
-								<input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="New" id="new_pass" required>
-								<div class="invalid-feedback">
-								Please provide a New Password.
-								</div>
-							</div>
+                      <div class="col-md-12">
+                        <label for="new_pass" class="form-label">New Password<span> *</span></label>
+                        <input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="New" id="new_pass" required>
+                        <div class="invalid-feedback">
+                        Please provide a New Password.
+                        </div>
+                      </div>
 
-							<div class="col-md-12">
-								<label for="confirm_pass" class="form-label">Confirm Password<span> *</span></label>
-								<input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="Confirm" id="confirm_pass" required>
-								<div class="invalid-feedback">
-								Please provide a Confirm Password.
-								</div>
-							</div>
+                      <div class="col-md-12">
+                        <label for="confirm_pass" class="form-label">Confirm Password<span> *</span></label>
+                        <input type="text" class="form-control" autocapitalize="on" autocomplete="off" name="Confirm" id="confirm_pass" required>
+                        <div class="invalid-feedback">
+                        Please provide a Confirm Password.
+                        </div>
+                      </div>
 
-						</div>
+                    </div>
 
-						<div class="addBtn">
-							<button type="submit" class="btn-danger" name="btn-update-password" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
-						</div>
-					</form>
-				</div>
+                    <div class="addBtn">
+                      <button type="submit" class="btn-danger" name="btn-update-password" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
+                    </div>
+                  </form>
+                </div>
             </div> 
         </div>
     </div>

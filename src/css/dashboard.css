@@ -49,16 +49,17 @@ ol, ul {
 
 /* View More */
 .view{
-	padding: 5px 8px;
+	padding: 2px 5px;
 	border-radius: 3px;
-	font-size: 14px;
+	font-size: 12px;
 	cursor: pointer;
 	margin-top: -6px;
 	margin-bottom: 4px;
+  color: var(--white);
 }
 
-.view a{
-	color: var(--whiter);
+.view:hover{
+	color: var(--white);
 }
 
 /* Add Data */

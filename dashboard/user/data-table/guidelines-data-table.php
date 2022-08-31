@@ -69,7 +69,7 @@ $output = '
     $output .= '
     <tr>
       <td>'.$row["guidelines_name"].'</td>
-      <td><button type="button" class="btn btn-danger view"> <a href="teachers-profile" class="view"><i class="bx bx-plus-medical"></i></a></button></td>
+      <td><button type="button" class="btn btn-danger"> <a href="add-guidelines?Id='.$row["guidelines_Id"].'" class="view"><i class="bx bx-plus-medical"></i></a></button></td>
     </tr>
     ';
   }

@@ -1,19 +1,30 @@
 <?php
 include_once '../../database/dbconfig2.php';
-require_once 'authentication/superadmin-class.php';
-include_once 'controller/select-settings-coniguration-controller.php';
+require_once 'authentication/user-class.php';
+include_once __DIR__ .'/../superadmin/controller/select-settings-coniguration-controller.php';
 
+$user_home = new USER();
 
-$superadmin_home = new SUPERADMIN();
-
-if(!$superadmin_home->is_logged_in())
+if(!$user_home->is_logged_in())
 {
- $superadmin_home->redirect('../../public/superadmin/signin');
+ $user_home->redirect('../../');
 }
 
-$stmt = $superadmin_home->runQuery("SELECT * FROM superadmin WHERE superadminId=:uid");
-$stmt->execute(array(":uid"=>$_SESSION['superadminSession']));
+$stmt = $user_home->runQuery("SELECT * FROM user WHERE userId=:uid");
+$stmt->execute(array(":uid"=>$_SESSION['userSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$UId 			= $row['userId'];
+$profile_user 	= $row['userProfile'];
+
+$Guidelines_ID = $_GET['Id'];
+
+$pdoQuery = "SELECT * FROM guidelines WHERE guidelines_Id = :ID";
+$pdoResult = $pdoConnect->prepare($pdoQuery);
+$pdoExec = $pdoResult->execute(array(":ID" => $Guidelines_ID));
+$Guidelines_data = $pdoResult->fetch(PDO::FETCH_ASSOC);
+
+$guidelines_name = $Guidelines_data["guidelines_name"];
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +36,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
-  <title>Guidelines | Add Boxes or Checklist</title>
+  <title>Guidelines | Add Guidlines</title>
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -47,22 +58,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
       </li>
       <li>
         <a href="profile">
-          <i class='bx bxs-user'></i>
+          <i class='bx bx-user'></i>
           <span class="links_name">
             Profile
           </span>
         </a>
       </li>
       <li>
-      <a href="admin">
-          <i class='bx bxs-user-pin'></i>
-          <span class="links_name">
-            Admin
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="guidelines">
+        <a href="guidelines" class="active">
           <i class='bx bxs-book-bookmark'></i>
           <span class="links_name">
             Guidelines
@@ -70,15 +73,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-        <a href="reports">
-          <i class='bx bxs-book'></i>
-          <span class="links_name">
-            Reports
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="settings">
+        <a href="#">
           <i class='bx bx-cog'></i>
           <span class="links_name">
             Setting
@@ -86,7 +81,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li class="login">
-        <a href="authentication/superadmin-signout.php" class="btn-signout">
+        <a href="authentication/user-signout" class="btn-signout">
           <span class="links_name login_out">
             Signout
           </span>
@@ -101,43 +96,47 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
       <div class="toggle">
         <i class='bx bx-menu' id="btn"></i>
       </div>
-      <span class="user_name"><?php echo $row['name']; ?></span>
+      <span class="user_name"><?php echo $row['userLast_Name']; ?>, <?php echo $row['userFirst_Name']; ?></span>
       <div class="user_wrapper">
-        <a href="profile"><img src="../../src/img/<?php echo $profile ?>" alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
+        <a href="profile"><img src="../../src/img/<?php echo $profile_user ?>" alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
       </div>
     </div>
     <!-- End Top Bar -->
     <div class="header">
-        <h1 class="title">Add Boxes or Checklist</h1>
+        <h1 class="title">Add Guidelines</h1>
         <div class="breadcrumbs">
-            <p><a href="home">Home</a></p>
+            <p><a href="">Home</a></p>
             <p class="divider"> | </p>
-            <p><a href="guidelines">Guidelines</a></p>
+            <p><a href="guidelines">Guidelines Lists</a></p>
             <p class="divider"> | </p>
             <p class="active"> Add</p>
+            
         </div>
     </div>
     <!-- Content -->
-    <div class="details">
+    <di v class="details">
       <div class="recent_project">
+        <div class="card_header">
+          <h2><?php echo $guidelines_name ?></h2>
+        </div>
         <div class="card_body">
-        <form action="controller/add-guidelines-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
-						<div class="row gx-5 needs-validation">
+            <form action="controller/add-teacher-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
+                <div class="row gx-5 needs-validation">
 
-							<div class="col-md-12">
-								<label for="Guidelines" class="form-label">Add Guidelines<span> *</span></label>
-								<input type="text" class="form-control" autocapitalize="on"  autocomplete="off" name="Guidelines" id="Guidelines" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
-								<div class="invalid-feedback">
-								Please provide a Guidelines.
-								</div>
-							</div>
+                    <div class="col-md-12">
+                        <label for="logo" class="form-label">Upload Proof<span> *</span></label>
+                        <input type="file" class="form-control" name="Logo" id="logo" style="height: 33px ;" required>
+                        <div class="invalid-feedback">
+                        Please provide a Logo.
+                        </div>
+                    </div>
 
-						</div>
+                </div>
 
-						<div class="addBtn">
-							<button type="submit" class="btn-danger" name="btn-register" id="btn-register" onclick="return IsEmpty(); sexEmpty();">Add</button>
-						</div>
-					</form>
+                <div class="addBtn">
+                    <button type="submit" class="btn-danger" name="btn-register" id="btn-register" onclick="return IsEmpty(); sexEmpty();">Add</button>
+                </div>
+            </form>
         </div>
       </div>
     </div>
@@ -165,24 +164,6 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
       }
     }
-
-    // Form
-    (function () {
-        'use strict'
-        var forms = document.querySelectorAll('.needs-validation')
-        Array.prototype.slice.call(forms)
-        .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-            if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-            }
-
-            form.classList.add('was-validated')
-            }, false)
-        })
-    })();
-
 
     // Signout
     $('.btn-signout').on('click', function(e){

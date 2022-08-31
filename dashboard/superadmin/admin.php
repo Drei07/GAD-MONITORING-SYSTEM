@@ -65,7 +65,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         <a href="guidelines">
           <i class='bx bxs-book-bookmark'></i>
           <span class="links_name">
-            Guide lines
+            Guidelines
           </span>
         </a>
       </li>

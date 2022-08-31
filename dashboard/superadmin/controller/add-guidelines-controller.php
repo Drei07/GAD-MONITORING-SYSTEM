@@ -14,6 +14,7 @@ if(!$superadmin_home->is_logged_in())
 if(isset($_POST['btn-register'])) {
 
     $Guidelines        = trim($_POST['Guidelines']);
+    $num               = str_pad(mt_rand(1,99999999),8,'0',STR_PAD_LEFT);
 
     $pdoQuery = "SELECT * FROM guidelines WHERE guidelines_name = :name LIMIT 1";
     $pdoResult = $pdoConnect->prepare($pdoQuery);
@@ -31,13 +32,14 @@ if(isset($_POST['btn-register'])) {
     else
     {
 
-    $pdoQuery = "INSERT INTO guidelines (guidelines_name) VALUES (:guidelines_name)";
+    $pdoQuery = "INSERT INTO guidelines (guidelines_name, guidelines_Id) VALUES (:guidelines_name, :guidelines_Id)";
     $pdoResult1 = $pdoConnect->prepare($pdoQuery);
     $pdoExec = $pdoResult1->execute
     (
         array
         ( 
             ":guidelines_name"                =>$Guidelines,
+            ":guidelines_Id"                  => $num
 
         )
       );
@@ -47,6 +49,19 @@ if(isset($_POST['btn-register'])) {
       $_SESSION['status_code'] = "success";
       $_SESSION['status_timer'] = 40000;
       header('Location: ../add-guidelines');
+
+      if($pdoExec){
+        $sql =  "CREATE TABLE guidelines_$num(
+            Id INT(145) AUTO_INCREMENT PRIMARY KEY,
+            userId VARCHAR(125) NULL,
+            files VARCHAR(125) NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+        )";
+      }
+
+      $Result = $pdoConnect->prepare($sql);
+      $Exec = $Result->execute();
     }
 }
 else
