@@ -139,8 +139,8 @@ class ADMIN
  public function logout()
  {
 
-  session_destroy();
-  $_SESSION['adminSession'] = false;
+  unset($_SESSION['adminSession']);
+  
  }
  
  function send_mail($email,$message,$subject,$smtp_email,$smtp_password,$system_name)
