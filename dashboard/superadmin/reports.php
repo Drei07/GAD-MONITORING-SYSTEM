@@ -1,21 +1,19 @@
 <?php
 include_once '../../database/dbconfig2.php';
-require_once 'authentication/admin-class.php';
-include_once '../superadmin/controller/select-settings-coniguration-controller.php';
+require_once 'authentication/superadmin-class.php';
+include_once 'controller/select-settings-coniguration-controller.php';
 
 
-$user_home = new ADMIN();
+$superadmin_home = new SUPERADMIN();
 
-if(!$user_home->is_logged_in())
+if(!$superadmin_home->is_logged_in())
 {
- $user_home->redirect('../../public/admin/signin');
+ $superadmin_home->redirect('../../public/superadmin/signin');
 }
 
-$stmt = $user_home->runQuery("SELECT * FROM admin WHERE userId=:uid");
-$stmt->execute(array(":uid"=>$_SESSION['adminSession']));
+$stmt = $superadmin_home->runQuery("SELECT * FROM superadmin WHERE superadminId=:uid");
+$stmt->execute(array(":uid"=>$_SESSION['superadminSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-$profile_user 	= $row['adminProfile'];
 
 ?>
 <!DOCTYPE html>
@@ -25,6 +23,7 @@ $profile_user 	= $row['adminProfile'];
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="shortcut icon" href="../../src/img/<?php echo $logo ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
   <title>Home</title>
   <!-- box icon -->
@@ -39,7 +38,7 @@ $profile_user 	= $row['adminProfile'];
     </div>
     <ul>
       <li>
-        <a href="#" class="active">
+        <a href="home">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">
             Dashboard
@@ -47,23 +46,39 @@ $profile_user 	= $row['adminProfile'];
         </a>
       </li>
       <li>
-        <a href="#">
-          <i class='bx bx-user'></i>
+        <a href="profile">
+          <i class='bx bxs-user'></i>
           <span class="links_name">
             Profile
           </span>
         </a>
       </li>
       <li>
-        <a href="#">
-          <i class='bx bxs-truck'></i>
+      <a href="admin">
+          <i class='bx bxs-user-pin'></i>
           <span class="links_name">
-            Sales
+            Admin
           </span>
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="guidelines">
+          <i class='bx bxs-book-bookmark'></i>
+          <span class="links_name">
+            Guidelines
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="reports" class="active">
+          <i class='bx bxs-book'></i>
+          <span class="links_name">
+            Reports
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="settings">
           <i class='bx bx-cog'></i>
           <span class="links_name">
             Setting
@@ -71,7 +86,7 @@ $profile_user 	= $row['adminProfile'];
         </a>
       </li>
       <li class="login">
-        <a href="authentication/admin-signout.php" class="btn-signout">
+        <a href="authentication/superadmin-signout.php" class="btn-signout">
           <span class="links_name login_out">
             Signout
           </span>
@@ -86,9 +101,9 @@ $profile_user 	= $row['adminProfile'];
       <div class="toggle">
         <i class='bx bx-menu' id="btn"></i>
       </div>
-      <span class="user_name"><?php echo $row['adminLast_Name']; ?>, <?php echo $row['adminFirst_Name']; ?></span>
+      <span class="user_name"><?php echo $row['name']; ?></span>
       <div class="user_wrapper">
-        <a href="profile"><img src="../../src/img/<?php echo $profile_user ?>" alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
+        <a href="profile"><img src="../../src/img/<?php echo $profile ?>" alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
       </div>
     </div>
     <!-- End Top Bar -->
@@ -100,114 +115,20 @@ $profile_user 	= $row['adminProfile'];
             <p class="active"> Dashboard</p>
         </div>
     </div>
-    <!-- Content -->
-    <div class="card-boxes">
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">9.99</div>
-          <div class="box_topic">Total Order</div>
-        </div>
-        <i class='bx bx-cart-alt'></i>
-      </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">15.9</div>
-          <div class="box_topic">Total Sales</div>
-        </div>
-        <i class='bx bxs-cart-add'></i>
-      </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">30.20</div>
-          <div class="box_topic">Total Projects</div>
-        </div>
-        <i class='bx bx-cart'></i>
-      </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">50.9</div>
-          <div class="box_topic">Total Return</div>
-        </div>
-        <i class='bx bxs-cart-download'></i>
-      </div>
-    </div>
-    <!-- End Card Boxs -->
     <di v class="details">
       <div class="recent_project">
         <div class="card_header">
-          <h2>Lastet Projects</h2>
+          <h2>Reports</h2>
         </div>
        
-      </div>
-      <div class="recent_customers">
-        <div class="card_header">
-          <h2>New Customers</h2>
-        </div>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <div class="info_img">
-                  <img src="../../src/img/avatar-3.jpg" alt="">
-                </div>
-              </td>
-              <td>
-                <h4>Vanessa Tucker</h4>
-                <span>Vanessa@gmail.com</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="info_img">
-                  <img src="../../src/img/avatar-4.jpg" alt="">
-                </div>
-              </td>
-              <td>
-                <h4>Sharon Lessma</h4>
-                <span>Sharon@gmail.com</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="info_img">
-                  <img src="../../src/img/avatar-5.jpg" alt="">
-                </div>
-              </td>
-              <td>
-                <h4>Christina Mason</h4>
-                <span>Christina@gmail.com</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="info_img">
-                  <img src="../../src/img/avatar-2.jpg" alt="">
-                </div>
-              </td>
-              <td>
-                <h4>Willams Harris</h4>
-                <span>Willams@gmail.com</span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="info_img">
-                  <img src="../../src/img/avatar-3.jpg" alt="">
-                </div>
-              </td>
-              <td>
-                <h4>Sharon Lessma</h4>
-                <span>Willams@gmail.com</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </section>
 
+    <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../src/js/tooltip.js"></script>
 
   <script>
     let sidebar = document.querySelector(".sidebar");

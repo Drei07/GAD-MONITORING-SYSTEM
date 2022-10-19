@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 :root {
-  --red: #c72a2a;
-  --white-red: #dc3545;
+  --red: #f15f45;
+  --white-red: #f87d68;
   --dark-red: rgb(209, 4, 4);
   --white: #fff;
   --black: #0000;
@@ -26,6 +26,17 @@
 
 ol, ul {
   padding-left: 0;
+}
+
+.primary{
+	padding: 8px 30px;
+	border: none;
+	border-radius: 7px;
+	background-color: var(--red);
+	color: var(--white);
+	font-weight: 600;
+	font-size: 13px;
+	margin-right: 1.5rem;
 }
 
 /* ACTIVE */
@@ -56,6 +67,7 @@ ol, ul {
 	margin-top: -6px;
 	margin-bottom: 4px;
   color: var(--white);
+  text-decoration: none;
 }
 
 .view:hover{

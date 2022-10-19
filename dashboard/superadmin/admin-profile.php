@@ -17,19 +17,19 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $employeeId = $_GET["id"];
 
-$pdoQuery = "SELECT * FROM user WHERE userId = :id";
+$pdoQuery = "SELECT * FROM admin WHERE userId = :id";
 $pdoResult = $pdoConnect->prepare($pdoQuery);
 $pdoExec = $pdoResult->execute(array(":id"=>$employeeId));
 $employee = $pdoResult->fetch(PDO::FETCH_ASSOC);
 
-$employee_id = $employee["userId"];
-$employee_profile = $employee["userProfile"];
-$employee_Lname = $employee["userLast_Name"];
-$employee_Fname = $employee["userFirst_Name"];
-$employee_Mname = $employee["userMiddle_Name"];
-$employee_Email = $employee["userEmail"];
-$employee_position = $employee["userPosition"];
-$employee_status = $employee["userStatus"];
+$eadmin_id = $employee["userId"];
+$employee_profile = $employee["adminProfile"];
+$employee_Lname = $employee["adminLast_Name"];
+$employee_Fname = $employee["adminFirst_Name"];
+$employee_Mname = $employee["adminMiddle_Name"];
+$employee_Email = $employee["adminEmail"];
+$employee_position = $employee["adminPosition"];
+$employee_status = $employee["adminStatus"];
 $employee_last_update = $employee["updated_at"];
 
 ?>
@@ -42,7 +42,7 @@ $employee_last_update = $employee["updated_at"];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
-  <title>Admin | Admin Profile</title>
+  <title>Admin Profile</title>
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -144,11 +144,11 @@ $employee_last_update = $employee["updated_at"];
                         <?php
                          echo ($employee_status=="N" ? '<button class="P">Pending</button>' :  '<button class="A">Active</button>')
                         ?>
-						<button class="delete2"><a href="controller/delete-admin-data-controller.php?Id=<?php echo $employee_id ?>" class="btn-delete">Delete Account</a></button>
+						<button class="delete2"><a href="controller/delete-admin-data-controller.php?Id=<?php echo $eadmin_id ?>" class="btn-delete deletes">Delete Account</a></button>
 
 					</div>
 
-					<form action="controller/update-admin-data-controller.php?Id=<?php echo $employee_id ?>" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
+					<form action="" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
 						<div class="row gx-5 needs-validation">
 
 							<label class="form-label" style="text-align: left; padding-top: .5rem; padding-bottom: 1rem; font-size: 1rem; font-weight: bold;"><i class='bx bxs-edit'></i> Admin Information<p>Last update: <?php  echo $employee_last_update  ?></p></label>
@@ -185,19 +185,19 @@ $employee_last_update = $employee["updated_at"];
 								</div>
 							</div>
 
-							<div class="col-md-6">
-								<label for="position" class="form-label">Position<span> *</span></label>
-								<input  type="text" class="form-control" autocapitalize="on" maxlength="20" autocomplete="off" name="Position" id="position" value="<?php echo $employee_position ?>" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
+							<div class="col-md-6" style="opacity: 0;">
+								<label for="" class="form-label">Last Name<span> *</span></label>
+								<input disabled type="text" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="" id="" placeholder="<?php echo $employee_Lname ?>" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required >
 								<div class="invalid-feedback">
-								Please provide a Position
+								Please provide a Last Name.
 								</div>
 							</div>
-							
-							<div class="col-md-6">
-								<label for="employee_id" class="form-label">Employee ID<span> *</span></label>
-								<input  type="text" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="EmployeeId" id="employee_id" value="<?php echo $employeeId ?>" required >
+
+							<div class="col-md-6" style="opacity: 0;">
+								<label for="" class="form-label">Last Name<span> *</span></label>
+								<input disabled type="text" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="" id="" placeholder="<?php echo $employee_Lname ?>" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required >
 								<div class="invalid-feedback">
-								Please provide a Employee ID.
+								Please provide a Last Name.
 								</div>
 							</div>
 
@@ -214,7 +214,6 @@ $employee_last_update = $employee["updated_at"];
 
 						<div class="addBtn">
                             <button type="button" onclick="location.href='admin'" class="back">Back</button>
-							<button type="submit" class="btn-danger     primary add" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
 						</div>
 					</form>
             </div> 
@@ -269,7 +268,7 @@ $employee_last_update = $employee["updated_at"];
 
     //Delete Profile
 
-    $('.delete').on('click', function(e){
+    $('.deletes').on('click', function(e){
     e.preventDefault();
     const href = $(this).attr('href')
 

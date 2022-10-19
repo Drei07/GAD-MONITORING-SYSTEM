@@ -123,9 +123,9 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     <img src="../../src/img/<?php echo $profile ?>" alt="logo">
 
                     <a href="controller/delete-profile-controller.php" class="delete"><i class='bx bxs-trash'></i></a>
-                    <button class="btn-success change" onclick="edit()"><i class='bx bxs-edit'></i> Edit Profile</button>
-                    <button class="btn-success change" onclick="avatar()"><i class='bx bxs-user'></i> Change Avatar</button>
-                    <button class="btn-success change" onclick="password()"><i class='bx bxs-key'></i> Change Password</button>
+                    <button class="primary" onclick="edit()"><i class='bx bxs-edit'></i> Edit Profile</button>
+                    <button class="primary" onclick="avatar()"><i class='bx bxs-user'></i> Change Avatar</button>
+                    <button class="primary" onclick="password()"><i class='bx bxs-key'></i> Change Password</button>
 				</div>
 
                 					
@@ -162,7 +162,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         </div>
 
                         <div class="addBtn">
-                            <button disabled type="submit" class="btn-danger" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
+                            <button disabled type="submit" class="primary" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
                         </div>
                     </form>
                 </div>
@@ -200,7 +200,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     </div>
 
                     <div class="addBtn">
-                      <button type="submit" class="btn-danger" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
+                      <button type="submit" class="primary" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
                     </div>
                   </form>
                 </div>
@@ -238,7 +238,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     </div>
 
                     <div class="addBtn">
-                      <button type="submit" class="btn-danger" name="btn-update-password" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
+                      <button type="submit" class="primary" name="btn-update-password" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
                     </div>
                   </form>
                 </div>

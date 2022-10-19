@@ -121,7 +121,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     <div class="details">
       <div class="recent_project">
         <div class="card_body">
-        <form action="controller/add-teacher-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
+        <form action="controller/add-admin-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
 						<div class="row gx-5 needs-validation">
 
 							<div class="col-md-6">
@@ -183,7 +183,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 						</div>
 
 						<div class="addBtn">
-							<button type="submit" class="btn-danger" name="btn-register" id="btn-register" onclick="return IsEmpty(); sexEmpty();">Add</button>
+							<button type="submit" class="primary" name="btn-register" id="btn-register" onclick="return IsEmpty(); sexEmpty();">Add</button>
 						</div>
 					</form>
         </div>

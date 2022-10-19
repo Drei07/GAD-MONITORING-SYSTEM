@@ -1,12 +1,11 @@
 <?php
-require_once '../../user/authentication/user-class.php';
+require_once '../../admin/authentication/admin-class.php';
 
-$reg_user = new USER();
+$reg_user = new ADMIN();
 
 
 if(isset($_POST['btn-register'])) {
 
-    $employeeId     = trim($_POST['EmployeeId']);
     $position       = trim($_POST['Position']);
     $first_name     = trim($_POST['FName']);
     $middle_name    = trim($_POST['MName']);
@@ -41,7 +40,7 @@ if(isset($_POST['btn-register'])) {
     }
     else
     {
-        if($reg_user->register($employeeId,$position,$first_name,$middle_name,$last_name,$phone_number,$email,$upass,$tokencode,$uniqueID))
+        if($reg_user->register($position,$first_name,$middle_name,$last_name,$email,$upass,$tokencode))
         {   
         $id = $reg_user->lasdID();  
         $key = base64_encode($id);

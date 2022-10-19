@@ -118,9 +118,9 @@ $user_last_profile_update 	= $row['updated_at'];
 						<img src="../../src/img/<?php echo $profile_user ?>" alt="logo">
 
 						<a href="controller/delete-profile-controller.php?userId=<?php echo $UId ?>" class="delete"><i class='bx bxs-trash'></i></a>
-						<button class="btn-success change" onclick="edit()"><i class='bx bxs-edit'></i> Edit Profile</button>
-						<button class="btn-success change" onclick="avatar()"><i class='bx bxs-user'></i> Change Avatar</button>
-						<button class="btn-success change" onclick="password()"><i class='bx bxs-key'></i> Change Password</button>
+						<button class="primary" onclick="edit()"><i class='bx bxs-edit'></i> Edit Profile</button>
+						<button class="primary" onclick="avatar()"><i class='bx bxs-user'></i> Change Avatar</button>
+						<button class="primary" onclick="password()"><i class='bx bxs-key'></i> Change Password</button>
 
 					</div>
 					
@@ -189,7 +189,7 @@ $user_last_profile_update 	= $row['updated_at'];
 						</div>
 
 						<div class="addBtn">
-							<button type="submit" class="btn btn-danger" name="btn-update-profile" id="btn-update-profile" onclick="return IsEmpty(); sexEmpty();">Update</button>
+							<button type="submit" class="primary" name="btn-update-profile" id="btn-update-profile" onclick="return IsEmpty(); sexEmpty();">Update</button>
 						</div>
 					</form>
 					</div>
@@ -227,7 +227,7 @@ $user_last_profile_update 	= $row['updated_at'];
 						</div>
 
 						<div class="addBtn">
-							<button type="submit" class="btn btn-danger" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
+							<button type="submit" class="primary" name="btn-update" id="btn-update" onclick="return IsEmpty(); sexEmpty();">Update</button>
 						</div>
 					</form>
 					</div>
@@ -265,7 +265,7 @@ $user_last_profile_update 	= $row['updated_at'];
 						</div>
 
 						<div class="addBtn">
-							<button type="submit" class="btn-danger" name="btn-update-password" id="btn-update-password" onclick="return IsEmpty(); sexEmpty();">Update</button>
+							<button type="submit" class="primary" name="btn-update-password" id="btn-update-password" onclick="return IsEmpty(); sexEmpty();">Update</button>
 						</div>
 					</form>
 					</div>
