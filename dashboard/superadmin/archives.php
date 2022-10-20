@@ -25,7 +25,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
-  <title>Guidelines</title>
+  <title>Archives</title>
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -62,7 +62,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-        <a href="" class="active">
+        <a href="guidelines">
           <i class='bx bxs-book-bookmark'></i>
           <span class="links_name">
             Guidelines
@@ -78,7 +78,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-        <a href="archives">
+        <a href="archives" class="active">
         <i class='bx bxs-file-archive' ></i>
           <span class="links_name">
             Archives
@@ -104,47 +104,34 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     </ul>
   </div>
   <!-- End Sideber -->
-<section class="home_section">
+  <section class="home_section">
     <div class="topbar">
       <div class="toggle">
         <i class='bx bx-menu' id="btn"></i>
       </div>
       <span class="user_name"><?php echo $row['name']; ?></span>
       <div class="user_wrapper">
-        <a href="profile"><img src="../../src/img/<?php echo $profile ?>"  alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
+        <a href="profile"><img src="../../src/img/<?php echo $profile ?>" alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
       </div>
     </div>
     <!-- End Top Bar -->
     <div class="header">
-        <h1 class="title">List of of Boxes and Checklists</h1>
+        <h1 class="title">Archives</h1>
         <div class="breadcrumbs">
-            <p><a href="home">Home</a></p>
+            <p><a href="">Home</a></p>
             <p class="divider"> | </p>
-            <p class="active"> List</p>
+            <p class="active"> Archives</p>
         </div>
     </div>
-    <!-- Content -->
-    <div class="data_table">
-        <div class="card_body table">
-             <section class="data-table">
-                <div class="searchBx">
-                    <input type="input" placeholder="search . . . . . ." class="search" name="search_box" id="search_box"><button class="searchBtn"><i class="bx bx-search icon"></i></button>
-                </div>
-
-                <div class="table">
-                <div id="dynamic_content">
-                </div>
-            </section>
+    <di v class="details">
+      <div class="recent_project">
+        <div class="card_header">
+          <h2>Archives</h2>
         </div>
+       
+      </div>
     </div>
-
-        <!-- Add -->
-        <div class="add-data">
-        <a href="add-guidelines" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Add Guidelines">
-            <i class='bx bxs-plus-circle'></i>
-        </a>    
-    </div>  
-</section>
+  </section>
 
     <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
@@ -169,37 +156,6 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
       }
     }
 
-    //Ajax data table
-    $(document).ready(function(){
-
-    load_data(1);
-
-    function load_data(page, query = '')
-    {
-    $.ajax({
-        url:"data-table/guidelines-data-table.php",
-        method:"POST",
-        data:{page:page, query:query},
-        success:function(data)
-        {
-        $('#dynamic_content').html(data);
-        }
-    });
-    }
-
-    $(document).on('click', '.page-link', function(){
-    var page = $(this).data('page_number');
-    var query = $('#search_box').val();
-    load_data(page, query);
-    });
-
-    $('#search_box').keyup(function(){
-    var query = $('#search_box').val();
-    load_data(1, query);
-    });
-
-    });
-    
     // Signout
     $('.btn-signout').on('click', function(e){
     e.preventDefault();

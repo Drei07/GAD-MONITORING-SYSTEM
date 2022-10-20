@@ -78,6 +78,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
+        <a href="archives">
+        <i class='bx bxs-file-archive' ></i>
+          <span class="links_name">
+            Archives
+          </span>
+        </a>
+      </li>
+      <li>
         <a href="settings">
           <i class='bx bx-cog'></i>
           <span class="links_name">
@@ -119,32 +127,33 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     <div class="card-boxes">
       <div class="box">
         <div class="right_side">
-          <div class="numbers">0</div>
-          <div class="box_topic">Total </div>
+            <?php
+                $pdoQuery = "SELECT * FROM admin";
+                $pdoResult1 = $pdoConnect->prepare($pdoQuery);
+                $pdoResult1->execute();
+
+                $count1 = $pdoResult1->rowCount();
+              ?>
+          <div class="numbers"><?php echo $count1 ?></div>
+          <div class="box_topic">Admin </div>
         </div>
-        <i class='bx bx-cart-alt'></i>
+        <i class='bx bxs-user-account' ></i>
       </div>
       <div class="box">
         <div class="right_side">
-          <div class="numbers">0</div>
-          <div class="box_topic">Total </div>
+          <?php
+                $pdoQuery = "SELECT * FROM guidelines";
+                $pdoResult1 = $pdoConnect->prepare($pdoQuery);
+                $pdoResult1->execute();
+
+                $count2 = $pdoResult1->rowCount();
+              ?>
+          <div class="numbers"><?php echo $count2 ?></div>
+          <div class="box_topic">Guidlines </div>
         </div>
-        <i class='bx bxs-cart-add'></i>
+        <i class='bx bxs-book' ></i>
       </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">0</div>
-          <div class="box_topic">Total </div>
-        </div>
-        <i class='bx bx-cart'></i>
-      </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">0</div>
-          <div class="box_topic">Total </div>
-        </div>
-        <i class='bx bxs-cart-download'></i>
-      </div>
+      
     </div>
     <!-- End Card Boxs -->
     <di v class="details">

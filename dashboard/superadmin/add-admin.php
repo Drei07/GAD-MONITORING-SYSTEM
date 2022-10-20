@@ -78,6 +78,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
+        <a href="archives">
+        <i class='bx bxs-file-archive' ></i>
+          <span class="links_name">
+            Archives
+          </span>
+        </a>
+      </li>
+      <li>
         <a href="settings">
           <i class='bx bx-cog'></i>
           <span class="links_name">
@@ -148,31 +156,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 								</div>
 							</div>
 
-							<div class="col-md-6" >
-								<label for="phone_number" class="form-label">Phone Number<span> *</span></label>
-								<div class="input-group flex-nowrap">
-								<span class="input-group-text" id="addon-wrapping">+63</span>
-								<input type="text" class="form-control numbers"  autocapitalize="off" inputmode="numeric" autocomplete="off" name="PNumber" id="phone_number" minlength="10" maxlength="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required placeholder="10-digit number">
-								</div>
-							</div>
-
 							<div class="col-md-6">
-								<label for="position" class="form-label">Position<span> *</span></label>
-								<input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" autocapitalize="on" maxlength="20" autocomplete="off" name="Position" id="position" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
-								<div class="invalid-feedback">
-								Please provide a Position
-								</div>
-							</div>
-							
-							<div class="col-md-6">
-								<label for="employee_id" class="form-label">Employee ID<span> *</span></label>
-								<input type="text" onkeyup="this.value = this.value.toUpperCase();" class="form-control" autocapitalize="on" maxlength="15" autocomplete="off" name="EmployeeId" id="employee_id" required >
-								<div class="invalid-feedback">
-								Please provide a Employee ID.
-								</div>
-							</div>
-
-							<div class="col-md-12">
 								<label for="email" class="form-label">Email<span> *</span></label>
 								<input type="email" class="form-control" autocapitalize="off" autocomplete="off" name="Email" id="email" required placeholder="Ex. juan@email.com">
 								<div class="invalid-feedback">

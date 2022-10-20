@@ -28,7 +28,6 @@ $employee_Lname = $employee["adminLast_Name"];
 $employee_Fname = $employee["adminFirst_Name"];
 $employee_Mname = $employee["adminMiddle_Name"];
 $employee_Email = $employee["adminEmail"];
-$employee_position = $employee["adminPosition"];
 $employee_status = $employee["adminStatus"];
 $employee_last_update = $employee["updated_at"];
 
@@ -95,6 +94,14 @@ $employee_last_update = $employee["updated_at"];
         </a>
       </li>
       <li>
+        <a href="archives">
+        <i class='bx bxs-file-archive' ></i>
+          <span class="links_name">
+            Archives
+          </span>
+        </a>
+      </li>
+      <li>
         <a href="settings">
           <i class='bx bx-cog'></i>
           <span class="links_name">
@@ -139,8 +146,7 @@ $employee_last_update = $employee["updated_at"];
             <div class="profile-img">
 						<img src="../../src/img/<?php echo $employee_profile ?>" alt="logo">
                         <h5><?php echo $employee_Lname?>, <?php echo $employee_Fname?> <?php echo $employee_Mname?></h5>
-                        <p><?php echo $employeeId ?></p>
-                        <h7><?php echo $employee_position ?></h7>
+                        <p>ADMIN-ID <?php echo $employeeId ?></p>
                         <?php
                          echo ($employee_status=="N" ? '<button class="P">Pending</button>' :  '<button class="A">Active</button>')
                         ?>
@@ -213,7 +219,7 @@ $employee_last_update = $employee["updated_at"];
 						</div>
 
 						<div class="addBtn">
-                            <button type="button" onclick="location.href='admin'" class="back">Back</button>
+                            <button type="button" onclick="location.href='admin'" class="primary">Back</button>
 						</div>
 					</form>
             </div> 

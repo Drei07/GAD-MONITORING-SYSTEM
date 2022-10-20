@@ -19,8 +19,10 @@ include_once '../../dashboard/superadmin/controller/select-settings-coniguration
     <div class="split-screen">
         <div class="left">
             <section class="copy">
-                <h1>Exlplore your Creativity</h1>
-                <p>Over 1000 courses taught by real creatives.</p>
+                <img src="../../src/img/DHVSU_logo.png" width="120px">
+                <br>
+                <br>
+                <p>DHVSU Harmonized Gender and Development<br>Guidelines System</p>
             </section>
         </div>
         <div class="right">

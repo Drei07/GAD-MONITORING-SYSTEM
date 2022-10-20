@@ -78,6 +78,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
+        <a href="archives">
+        <i class='bx bxs-file-archive' ></i>
+          <span class="links_name">
+            Archives
+          </span>
+        </a>
+      </li>
+      <li>
         <a href="settings">
           <i class='bx bx-cog'></i>
           <span class="links_name">

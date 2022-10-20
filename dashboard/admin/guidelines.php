@@ -1,19 +1,22 @@
 <?php
 include_once '../../database/dbconfig2.php';
-require_once 'authentication/superadmin-class.php';
-include_once 'controller/select-settings-coniguration-controller.php';
+require_once 'authentication/admin-class.php';
+include_once '../superadmin/controller/select-settings-coniguration-controller.php';
 
+$user_home = new ADMIN();
 
-$superadmin_home = new SUPERADMIN();
-
-if(!$superadmin_home->is_logged_in())
+if(!$user_home->is_logged_in())
 {
- $superadmin_home->redirect('../../public/superadmin/signin');
+ $user_home->redirect('../../public/admin/signin');
 }
 
-$stmt = $superadmin_home->runQuery("SELECT * FROM superadmin WHERE superadminId=:uid");
-$stmt->execute(array(":uid"=>$_SESSION['superadminSession']));
+$stmt = $user_home->runQuery("SELECT * FROM admin WHERE userId=:uid");
+$stmt->execute(array(":uid"=>$_SESSION['adminSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$profile_user 	= $row['adminProfile'];
+$UId 			= $row['userId'];
+
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +28,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
-  <title>Guidelines</title>
+  <title>Guidlines</title>
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -38,7 +41,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
     <ul>
       <li>
-        <a href="home">
+        <a href="home" >
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">
             Dashboard
@@ -47,17 +50,9 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
       </li>
       <li>
         <a href="profile">
-          <i class='bx bxs-user'></i>
+          <i class='bx bx-user'></i>
           <span class="links_name">
             Profile
-          </span>
-        </a>
-      </li>
-      <li>
-      <a href="admin">
-          <i class='bx bxs-user-pin'></i>
-          <span class="links_name">
-            Admin
           </span>
         </a>
       </li>
@@ -70,23 +65,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-        <a href="reports">
-          <i class='bx bxs-book'></i>
-          <span class="links_name">
-            Reports
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="archives">
-        <i class='bx bxs-file-archive' ></i>
-          <span class="links_name">
-            Archives
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="settings">
+        <a href="#">
           <i class='bx bx-cog'></i>
           <span class="links_name">
             Setting
@@ -94,7 +73,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li class="login">
-        <a href="authentication/superadmin-signout.php" class="btn-signout">
+        <a href="authentication/user-signout" class="btn-signout">
           <span class="links_name login_out">
             Signout
           </span>
@@ -104,14 +83,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     </ul>
   </div>
   <!-- End Sideber -->
-<section class="home_section">
-    <div class="topbar">
+  <section class="home_section">
+  <div class="topbar">
       <div class="toggle">
         <i class='bx bx-menu' id="btn"></i>
       </div>
-      <span class="user_name"><?php echo $row['name']; ?></span>
+      <span class="user_name"><?php echo $row['adminLast_Name']; ?>, <?php echo $row['adminFirst_Name']; ?></span>
       <div class="user_wrapper">
-        <a href="profile"><img src="../../src/img/<?php echo $profile ?>"  alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
+        <a href="profile"><img src="../../src/img/<?php echo $profile_user ?>" alt="user-profile" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Profile"></a>
       </div>
     </div>
     <!-- End Top Bar -->
@@ -137,14 +116,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
             </section>
         </div>
     </div>
+  </section>
 
-        <!-- Add -->
-        <div class="add-data">
-        <a href="add-guidelines" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Add Guidelines">
-            <i class='bx bxs-plus-circle'></i>
-        </a>    
-    </div>  
-</section>
 
     <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
@@ -199,7 +172,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     });
 
     });
-    
+
+
     // Signout
     $('.btn-signout').on('click', function(e){
     e.preventDefault();

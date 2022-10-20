@@ -25,7 +25,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
-  <title>Home</title>
+  <title>Reports</title>
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -78,6 +78,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
+        <a href="archives">
+        <i class='bx bxs-file-archive' ></i>
+          <span class="links_name">
+            Archives
+          </span>
+        </a>
+      </li>
+      <li>
         <a href="settings">
           <i class='bx bx-cog'></i>
           <span class="links_name">
@@ -108,11 +116,11 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
     <!-- End Top Bar -->
     <div class="header">
-        <h1 class="title">Dashboard</h1>
+        <h1 class="title">Reports</h1>
         <div class="breadcrumbs">
             <p><a href="">Home</a></p>
             <p class="divider"> | </p>
-            <p class="active"> Dashboard</p>
+            <p class="active"> Reports</p>
         </div>
     </div>
     <di v class="details">

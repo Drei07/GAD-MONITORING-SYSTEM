@@ -34,16 +34,14 @@ class ADMIN
   return $stmt;
  }
  
- public function register($position,$first_name,$middle_name,$last_name,$email,$upass,$tokencode)
+ public function register($first_name,$middle_name,$last_name,$email,$upass,$tokencode)
  {
   try
   {       
    $password = md5($upass);
-   $stmt = $this->conn->prepare("INSERT INTO admin(adminPosition,adminFirst_Name,adminMiddle_Name,adminLast_Name,adminEmail,adminPassword,tokencode) 
-                                        VALUES(:adminPosition,:adminFirst_Name,:adminMiddle_Name,:adminLast_Name,:adminEmail,:adminPassword,:tokencode)");
+   $stmt = $this->conn->prepare("INSERT INTO admin(adminFirst_Name,adminMiddle_Name,adminLast_Name,adminEmail,adminPassword,tokencode) 
+                                        VALUES(:adminFirst_Name,:adminMiddle_Name,:adminLast_Name,:adminEmail,:adminPassword,:tokencode)");
    
-
-   $stmt->bindparam(":adminPosition",$position);
    $stmt->bindparam(":adminFirst_Name",$first_name);
    $stmt->bindparam(":adminMiddle_Name",$middle_name);
    $stmt->bindparam(":adminLast_Name",$last_name);

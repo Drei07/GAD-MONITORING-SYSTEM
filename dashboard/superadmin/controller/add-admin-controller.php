@@ -6,7 +6,7 @@ $reg_user = new ADMIN();
 
 if(isset($_POST['btn-register'])) {
 
-    $position       = trim($_POST['Position']);
+
     $first_name     = trim($_POST['FName']);
     $middle_name    = trim($_POST['MName']);
     $last_name      = trim($_POST['LName']);
@@ -40,7 +40,7 @@ if(isset($_POST['btn-register'])) {
     }
     else
     {
-        if($reg_user->register($position,$first_name,$middle_name,$last_name,$email,$upass,$tokencode))
+        if($reg_user->register($first_name,$middle_name,$last_name,$email,$upass,$tokencode))
         {   
         $id = $reg_user->lasdID();  
         $key = base64_encode($id);
@@ -54,7 +54,7 @@ if(isset($_POST['btn-register'])) {
             Email:<br />$email
             Password:<br />$upass
             <br /><br />
-            <a href='https://localhost/HGDG/public/user/verify?id=$id&code=$tokencode'>Click HERE to Verify your Account!</a>
+            <a href='https://localhost/HGDG/public/admin/verify?id=$id&code=$tokencode'>Click HERE to Verify your Account!</a>
             <br /><br />
             Thanks,";
             

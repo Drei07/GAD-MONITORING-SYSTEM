@@ -932,7 +932,7 @@ ol, ul {
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1400px) {
   .card-boxes {
     grid-template-columns: repeat(2, 1fr);
   }
