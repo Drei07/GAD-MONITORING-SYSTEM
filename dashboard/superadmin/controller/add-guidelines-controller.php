@@ -14,7 +14,11 @@ if(!$superadmin_home->is_logged_in())
 if(isset($_POST['btn-register'])) {
 
     $Guidelines        = trim($_POST['Guidelines']);
+    $files              = trim($_POST['files']);
     $num               = str_pad(mt_rand(1,99999999),8,'0',STR_PAD_LEFT);
+
+    $folder = "../../PDF/" . basename($_FILES['files']['name']);
+    $files = $_FILES['files']['name'];
 
     $pdoQuery = "SELECT * FROM guidelines WHERE guidelines_name = :name LIMIT 1";
     $pdoResult = $pdoConnect->prepare($pdoQuery);
@@ -32,13 +36,14 @@ if(isset($_POST['btn-register'])) {
     else
     {
 
-    $pdoQuery = "INSERT INTO guidelines (guidelines_name, guidelines_Id) VALUES (:guidelines_name, :guidelines_Id)";
+    $pdoQuery = "INSERT INTO guidelines (guidelines_name, guidelines_Id, files) VALUES (:guidelines_name, :guidelines_Id, :files)";
     $pdoResult1 = $pdoConnect->prepare($pdoQuery);
     $pdoExec = $pdoResult1->execute
     (
         array
         ( 
             ":guidelines_name"                =>$Guidelines,
+            ":files"                          =>$files,
             ":guidelines_Id"                  => $num
 
         )
@@ -48,7 +53,7 @@ if(isset($_POST['btn-register'])) {
       $_SESSION['status'] = "Guidelines is successfully added!";
       $_SESSION['status_code'] = "success";
       $_SESSION['status_timer'] = 40000;
-      header('Location: ../add-guidelines');
+      header('Location: ../guidelines');
 
       if($pdoExec){
         $sql =  "CREATE TABLE guidelines_$num(
@@ -63,6 +68,10 @@ if(isset($_POST['btn-register'])) {
       $Result = $pdoConnect->prepare($sql);
       $Exec = $Result->execute();
     }
+
+    if (move_uploaded_file($_FILES['files']['tmp_name'], $folder)) {
+        header('Location: ../guidelines');
+    }
 }
 else
 {
@@ -70,7 +79,7 @@ else
     $_SESSION['status'] = "Something went wrong, please try again!";
     $_SESSION['status_code'] = "error";
     $_SESSION['status_timer'] = 100000;
-    header('Location: ../add-room');
+    header('Location: ../add-guidelines');
 
 }
 

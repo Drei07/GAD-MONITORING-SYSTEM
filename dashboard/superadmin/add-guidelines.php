@@ -129,7 +129,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     <div class="details">
       <div class="recent_project">
         <div class="card_body">
-        <form action="controller/add-guidelines-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
+        <form action="controller/add-guidelines-controller.php" method="POST" class="row gx-5 needs-validation" name="form" enctype="multipart/form-data" onsubmit="return validate()"  novalidate style="overflow: hidden;">
 						<div class="row gx-5 needs-validation">
 
 							<div class="col-md-12">
@@ -139,6 +139,14 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 								Please provide a Guidelines.
 								</div>
 							</div>
+
+              <div class="col-md-12">
+                <label for="files" class="form-label">Upload Files<span> *</span></label>
+                <input type="file" class="form-control" name="files" id="files" style="height: 33px ;" required>
+                <div class="invalid-feedback">
+                Please add a Files.
+                </div>
+              </div>
 
 						</div>
 

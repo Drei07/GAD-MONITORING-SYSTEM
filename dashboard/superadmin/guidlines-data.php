@@ -15,6 +15,16 @@ $stmt = $superadmin_home->runQuery("SELECT * FROM superadmin WHERE superadminId=
 $stmt->execute(array(":uid"=>$_SESSION['superadminSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+$Guidlines_ID = $_GET ['Id'];
+
+$pdoQuery = "SELECT * FROM guidelines WHERE Id = :Id";
+$pdoResult = $pdoConnect->prepare($pdoQuery);
+$pdoExec = $pdoResult->execute(array(":Id" => $Guidlines_ID));
+$guidlines_data = $pdoResult->fetch(PDO::FETCH_ASSOC);
+
+$guidlines_name = $guidlines_data['guidelines_name'];
+$guidlines_file = $guidlines_data['files'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +37,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js" integrity="sha512-MoP2OErV7Mtk4VL893VYBFq8yJHWQtqJxTyIAsCVKzILrvHyKQpAwJf9noILczN6psvXUxTr19T5h+ndywCoVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <title>Archives</title>
+  <title>Guidlines Reports</title>
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -64,7 +74,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-        <a href="guidelines">
+        <a href="guidelines"  class="active">
           <i class='bx bxs-book-bookmark'></i>
           <span class="links_name">
             Guidelines
@@ -80,7 +90,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-        <a href="archives" class="active">
+        <a href="archives">
         <i class='bx bxs-file-archive' ></i>
           <span class="links_name">
             Archives
@@ -118,27 +128,44 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
     <!-- End Top Bar -->
     <div class="header">
-        <h1 class="title">Archives</h1>
+        <h1 class="title"><?php echo $guidlines_name ?></h1>
         <div class="breadcrumbs">
             <p><a href="">Home</a></p>
             <p class="divider"> | </p>
-            <p class="active"> Archives</p>
+            <p><a href="guidelines">List</a></p>
+            <p class="divider"> | </p>
+            <p class="active">Data</p>
         </div>
+        <button type="button" class="primary" data-bs-toggle="modal" data-bs-target="#classModal"><i class='bx bxs-file-pdf'></i> View File</button>
     </div>
     <di v class="details">
       <div class="recent_project">
         <div class="card_header">
-          <h2>Archives</h2>
-
-        <div id="example1"></div>
-        <script>PDFObject.embed("../PDF/Pullout-16-Funding-Facilities.pdf", "#example1");</script>
-
+          <h2>Reports</h2>
         </div>
+       
       </div>
     </div>
-  </section>
 
+    	<!-- MODALS -->
+		<div class="class-modal">
+			<div class="modal fade" id="classModal" tabindex="-1" aria-labelledby="classModalLabel" aria-hidden="true" >
+				<div class="modal-dialog modal-dialog-centered modal-xl">
+					<div class="modal-content">
+						<div class="modal-body">
+                            <div id="pdf-files"></div>
+                            <script>PDFObject.embed("../PDF/<?php echo $guidlines_file ?>", "#pdf-files", {omitInlineStyles: false});</script>
+						</div>
+					</div>
+                    <div class="header"><i class='bx bx-exit-fullscreen' ></i> Click outside to exit.</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- END MODALS -->
+  </section>
   
+
     <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>

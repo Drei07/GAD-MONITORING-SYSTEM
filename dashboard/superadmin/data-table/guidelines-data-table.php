@@ -33,13 +33,13 @@ else
 }
 
 $query = "
-SELECT * FROM guidelines
+SELECT * FROM guidelines WHERE status = :status
 ";
 $output = '';
 if($_POST['query'] != '')
 {
   $query .= '
-  WHERE guidelines_name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
+  AND guidelines_name LIKE "%'.str_replace(' ', '%', $_POST['query']).'%"
   ';
 }
 
@@ -48,11 +48,11 @@ $query .= 'ORDER BY Id ASC ';
 $filter_query = $query . 'LIMIT '.$start.', '.$limit.'';
 
 $statement = $pdoConnect->prepare($query);
-$statement->execute(array());
+$statement->execute(array(":status" => "active"));
 $total_data = $statement->rowCount();
 
 $statement = $pdoConnect->prepare($filter_query);
-$statement->execute(array());
+$statement->execute(array(":status" => "active"));
 $total_filter_data = $statement->rowCount();
 
 if($total_data > 0)
@@ -60,6 +60,7 @@ if($total_data > 0)
 $output = '
 
     <thead>
+    <th>GUIDLINE-ID</th>
     <th>LIST OF BOXES AND CHECKLISTS</th>
     <th>ACTION</th>
     </thead>
@@ -68,8 +69,9 @@ $output = '
   {
     $output .= '
     <tr>
+    <td>'.$row["guidelines_Id"].'</td>
       <td>'.$row["guidelines_name"].'</td>
-      <td><button type="button" class="primary"> <a href="guidlines-data" class="view">View</a></button></td>
+      <td><button type="button" class="primary"> <a href="guidlines-data?Id='.$row["Id"].'" class="view">View</a></button></td>
     </tr>
     ';
   }

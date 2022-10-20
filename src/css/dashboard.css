@@ -39,6 +39,11 @@ ol, ul {
 	margin-right: 1.5rem;
 }
 
+/* PDF READER */
+
+.pdfobject-container { height: 700px; width: 100%;}
+.pdfobject { border: 1px solid #666; border-radius: 10px }
+
 /* ACTIVE */
 .A {
 	padding: 4px 10px;
@@ -104,6 +109,36 @@ ol, ul {
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
 }
+
+/* MODALS */
+
+.class-modal .modal-dialog{
+  display: block;
+}
+
+.class-modal .modal-content {
+  border: hidden;
+  border-radius: 10px;
+  height: 100%;
+  background-color: transparent;
+}
+
+.class-modal .header {
+  color: var(--white);
+  text-align: center;
+  padding: 1.5rem;
+  opacity: 0.4;
+  font-size: 1.2rem;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+
+.class-modal .modal-content .modal-body {
+padding: 0rem;
+overflow: hidden;
+
+}	
 
 
 .sidebar {
