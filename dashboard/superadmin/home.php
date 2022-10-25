@@ -126,7 +126,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     <!-- Content -->
     <div class="card-boxes">
       <div class="box">
-        <div class="right_side">
+        <div class="right_side" nclick="location.href='admin'">
             <?php
                 $pdoQuery = "SELECT * FROM admin";
                 $pdoResult1 = $pdoConnect->prepare($pdoQuery);
