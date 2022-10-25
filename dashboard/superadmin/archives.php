@@ -6,18 +6,18 @@ include_once 'controller/select-settings-coniguration-controller.php';
 
 $superadmin_home = new SUPERADMIN();
 
-if(!$superadmin_home->is_logged_in())
-{
- $superadmin_home->redirect('../../public/superadmin/signin');
+if (!$superadmin_home->is_logged_in()) {
+  $superadmin_home->redirect('../../public/superadmin/signin');
 }
 
 $stmt = $superadmin_home->runQuery("SELECT * FROM superadmin WHERE superadminId=:uid");
-$stmt->execute(array(":uid"=>$_SESSION['superadminSession']));
+$stmt->execute(array(":uid" => $_SESSION['superadminSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,6 +31,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
   <div class="sidebar">
     <div class="logo_details">
@@ -56,7 +57,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </a>
       </li>
       <li>
-      <a href="admin">
+        <a href="admin">
           <i class='bx bxs-user-pin'></i>
           <span class="links_name">
             Admin
@@ -81,7 +82,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
       </li>
       <li>
         <a href="archives" class="active">
-        <i class='bx bxs-file-archive' ></i>
+          <i class='bx bxs-file-archive'></i>
           <span class="links_name">
             Archives
           </span>
@@ -118,31 +119,33 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
     <!-- End Top Bar -->
     <div class="header">
-        <h1 class="title">Archives</h1>
-        <div class="breadcrumbs">
-            <p><a href="">Home</a></p>
-            <p class="divider"> | </p>
-            <p class="active"> Archives</p>
-        </div>
+      <h1 class="title">Archives</h1>
+      <div class="breadcrumbs">
+        <p><a href="">Home</a></p>
+        <p class="divider"> | </p>
+        <p class="active"> Archives</p>
+      </div>
     </div>
-    <di v class="details">
-      <div class="recent_project">
-        <div class="card_header">
-          <h2>Archives</h2>
+    <div class="data_table">
+      <div class="card_body table">
+          <section class="data-table">
+          <div class="searchBx">
+            <input type="input" placeholder="search . . . . . ." class="search" name="search_box" id="search_box"><button class="searchBtn"><i class="bx bx-search icon"></i></button>
+          </div>
 
-        <div id="example1"></div>
-        <script>PDFObject.embed("../PDF/Pullout-16-Funding-Facilities.pdf", "#example1");</script>
-
-        </div>
+          <div class="table">
+            <div id="dynamic_content">
+            </div>
+        </section>
       </div>
     </div>
   </section>
 
-  
-    <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../../src/js/tooltip.js"></script>
+
+  <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../../src/js/tooltip.js"></script>
 
   <script>
     let sidebar = document.querySelector(".sidebar");
@@ -155,52 +158,84 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     });
 
     function changeBtn() {
-      if(sidebar.classList.contains("open")) {
+      if (sidebar.classList.contains("open")) {
         closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
       } else {
         closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
       }
     }
 
-    // Signout
-    $('.btn-signout').on('click', function(e){
-    e.preventDefault();
-    const href = $(this).attr('href')
 
-            swal({
-            title: "Signout?",
-            text: "Are you sure do you want to signout?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
+    //Ajax data table
+    $(document).ready(function() {
+
+      load_data(1);
+
+      function load_data(page, query = '') {
+        $.ajax({
+          url: "data-table/",
+          method: "POST",
+          data: {
+            page: page,
+            query: query
+          },
+          success: function(data) {
+            $('#dynamic_content').html(data);
+          }
+        });
+      }
+
+      $(document).on('click', '.page-link', function() {
+        var page = $(this).data('page_number');
+        var query = $('#search_box').val();
+        load_data(page, query);
+      });
+
+      $('#search_box').keyup(function() {
+        var query = $('#search_box').val();
+        load_data(1, query);
+      });
+
+    });
+
+    // Signout
+    $('.btn-signout').on('click', function(e) {
+      e.preventDefault();
+      const href = $(this).attr('href')
+
+      swal({
+          title: "Signout?",
+          text: "Are you sure do you want to signout?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
         })
         .then((willSignout) => {
-            if (willSignout) {
+          if (willSignout) {
             document.location.href = href;
-            }
+          }
         });
     })
-
   </script>
 
-  	<!-- SWEET ALERT -->
-	<?php
+  <!-- SWEET ALERT -->
+  <?php
 
-    if(isset($_SESSION['status']) && $_SESSION['status'] !='')
-    {
-        ?>
-        <script>
-            swal({
-            title: "<?php echo $_SESSION['status_title']; ?>",
-            text: "<?php echo $_SESSION['status']; ?>",
-            icon: "<?php echo $_SESSION['status_code']; ?>",
-            button: false,
-            timer: <?php echo $_SESSION['status_timer']; ?>,
-            });
-        </script>
-        <?php
-        unset($_SESSION['status']);
-    }
-    ?>
+  if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
+  ?>
+    <script>
+      swal({
+        title: "<?php echo $_SESSION['status_title']; ?>",
+        text: "<?php echo $_SESSION['status']; ?>",
+        icon: "<?php echo $_SESSION['status_code']; ?>",
+        button: false,
+        timer: <?php echo $_SESSION['status_timer']; ?>,
+      });
+    </script>
+  <?php
+    unset($_SESSION['status']);
+  }
+  ?>
 </body>
+
 </html>

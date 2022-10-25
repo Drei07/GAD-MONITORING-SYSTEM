@@ -139,7 +139,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         </div>
         <i class='bx bxs-user-account' ></i>
       </div>
-      <div class="box">
+      <div class="box" onclick="location.href='guidelines'">
         <div class="right_side">
           <?php
                 $pdoQuery = "SELECT * FROM guidelines";

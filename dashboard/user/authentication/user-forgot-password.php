@@ -1,5 +1,11 @@
 <?php
 require_once 'user-class.php';
+
+//URL
+$main_url = "https://dhvsu-hgdg.tech";
+
+//LOCALHOST
+// $main_url = "https://localhost/HGDG";
 $user = new USER();
 
 if($user->is_logged_in()!="")
@@ -26,7 +32,7 @@ if(isset($_POST['btn-forgot-password']))
        <br /><br />
        Click Following Link To Reset Your Password 
        <br /><br />
-       <a href='https://localhost/HGDG/dashboard/user/authentication/user-reset-password?id=$id&code=$code'>click here to reset your password</a>
+       <a href='$main_url/dashboard/user/authentication/user-reset-password?id=$id&code=$code'>click here to reset your password</a>
        <br /><br />
        thank you :)
        ";

@@ -1,5 +1,10 @@
 <?php
 require_once '../../admin/authentication/admin-class.php';
+//URL
+$main_url = "https://dhvsu-hgdg.tech";
+
+//LOCALHOST
+// $main_url = "https://localhost/HGDG";
 
 $reg_user = new ADMIN();
 
@@ -54,7 +59,7 @@ if(isset($_POST['btn-register'])) {
             Email:<br />$email
             Password:<br />$upass
             <br /><br />
-            <a href='https://localhost/HGDG/public/admin/verify?id=$id&code=$tokencode'>Click HERE to Verify your Account!</a>
+            <a href='$main_url/public/admin/verify?id=$id&code=$tokencode'>Click HERE to Verify your Account!</a>
             <br /><br />
             Thanks,";
             

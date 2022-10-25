@@ -71,7 +71,7 @@ $profile_user 	= $row['adminProfile'];
         </a>
       </li>
       <li class="login">
-        <a href="authentication/user-signout" class="btn-signout">
+        <a href="authentication/admin-signout" class="btn-signout">
           <span class="links_name login_out">
             Signout
           </span>
@@ -102,22 +102,9 @@ $profile_user 	= $row['adminProfile'];
     </div>
     <!-- Content -->
     <div class="card-boxes">
-      <div class="box">
-        <div class="right_side">
-            <?php
-                $pdoQuery = "SELECT * FROM admin";
-                $pdoResult1 = $pdoConnect->prepare($pdoQuery);
-                $pdoResult1->execute();
 
-                $count1 = $pdoResult1->rowCount();
-              ?>
-          <div class="numbers"><?php echo $count1 ?></div>
-          <div class="box_topic">Admin </div>
-        </div>
-        <i class='bx bxs-user-account' ></i>
-      </div>
       <div class="box">
-        <div class="right_side">
+        <div class="right_side" onclick="location.href='guidelines'">
           <?php
                 $pdoQuery = "SELECT * FROM guidelines";
                 $pdoResult1 = $pdoConnect->prepare($pdoQuery);

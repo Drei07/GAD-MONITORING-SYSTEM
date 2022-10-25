@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2022 at 03:55 PM
+-- Generation Time: Oct 25, 2022 at 04:10 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -36,7 +36,7 @@ CREATE TABLE `admin` (
   `adminPassword` varchar(145) DEFAULT NULL,
   `adminStatus` enum('Y','N') DEFAULT 'N',
   `tokencode` varchar(145) DEFAULT NULL,
-  `adminProfile` varchar(1145) NOT NULL DEFAULT 'profile.png',
+  `adminProfile` varchar(1145) NOT NULL DEFAULT 'profile-red.png',
   `account_status` enum('active','disabled') DEFAULT 'active',
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
@@ -125,6 +125,8 @@ CREATE TABLE `guidelines_39165366` (
   `Id` int(145) NOT NULL,
   `userId` varchar(125) DEFAULT NULL,
   `files` varchar(125) DEFAULT NULL,
+  `guidelines_Id` varchar(145) DEFAULT NULL,
+  `status` enum('active','delete') NOT NULL DEFAULT 'active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -139,9 +141,18 @@ CREATE TABLE `guidelines_87434096` (
   `Id` int(145) NOT NULL,
   `userId` varchar(125) DEFAULT NULL,
   `files` varchar(125) DEFAULT NULL,
+  `guidelines_Id` varchar(145) DEFAULT NULL,
+  `status` enum('active','delete') NOT NULL DEFAULT 'active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `guidelines_87434096`
+--
+
+INSERT INTO `guidelines_87434096` (`Id`, `userId`, `files`, `guidelines_Id`, `status`, `created_at`, `updated_at`) VALUES
+(2, '1', 'DATA FLOW DIAGRAM and FLOWCHART.docx', '35800773', 'delete', '2022-10-25 13:37:38', '2022-10-25 14:08:57');
 
 -- --------------------------------------------------------
 
@@ -155,7 +166,7 @@ CREATE TABLE `superadmin` (
   `email` varchar(145) DEFAULT NULL,
   `password` varchar(145) DEFAULT NULL,
   `tokencode` varchar(145) DEFAULT NULL,
-  `profile` varchar(1145) NOT NULL DEFAULT 'profile.png',
+  `profile` varchar(1145) NOT NULL DEFAULT 'profile-red.png',
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -296,7 +307,12 @@ INSERT INTO `tb_logs` (`activityId`, `user`, `email`, `activity`, `date`) VALUES
 (65, 'Customer gadmonitoring4b@gmail.com', 'gadmonitoring4b@gmail.com', 'Has successfully signed in', '2022-10-20 07:05:14 AM'),
 (66, 'Customer gadmonitoring4b@gmail.com', 'gadmonitoring4b@gmail.com', 'Has successfully signed in', '2022-10-20 04:56:22 PM'),
 (67, 'Customer gadmonitoring4b@gmail.com', 'gadmonitoring4b@gmail.com', 'Has successfully signed in', '2022-10-20 04:56:27 PM'),
-(68, 'Superadmin gadmonitoring4b@gmail.com', 'gadmonitoring4b@gmail.com', 'Has successfully signed in', '2022-10-20 04:56:34 PM');
+(68, 'Superadmin gadmonitoring4b@gmail.com', 'gadmonitoring4b@gmail.com', 'Has successfully signed in', '2022-10-20 04:56:34 PM'),
+(69, 'Customer gadmonitoring4b@gmail.com', 'gadmonitoring4b@gmail.com', 'Has successfully signed in', '2022-10-25 05:15:35 PM'),
+(70, 'Superadmin gadmonitoring4b@gmail.com', 'gadmonitoring4b@gmail.com', 'Has successfully signed in', '2022-10-25 05:15:58 PM'),
+(71, 'Customer gadmonitoring4b@gmail.com', 'gadmonitoring4b@gmail.com', 'Has successfully signed in', '2022-10-25 05:24:06 PM'),
+(72, 'Customer gadmonitoring4b@gmail.com', 'gadmonitoring4b@gmail.com', 'Has successfully signed in', '2022-10-25 09:13:58 PM'),
+(73, 'Superadmin gadmonitoring4b@gmail.com', 'gadmonitoring4b@gmail.com', 'Has successfully signed in', '2022-10-25 09:14:05 PM');
 
 -- --------------------------------------------------------
 
@@ -426,7 +442,7 @@ ALTER TABLE `google_recaptcha_api`
 -- AUTO_INCREMENT for table `guidelines`
 --
 ALTER TABLE `guidelines`
-  MODIFY `Id` int(145) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(145) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `guidelines_39165366`
@@ -438,7 +454,7 @@ ALTER TABLE `guidelines_39165366`
 -- AUTO_INCREMENT for table `guidelines_87434096`
 --
 ALTER TABLE `guidelines_87434096`
-  MODIFY `Id` int(145) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(145) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `superadmin`
@@ -462,7 +478,7 @@ ALTER TABLE `system_logo`
 -- AUTO_INCREMENT for table `tb_logs`
 --
 ALTER TABLE `tb_logs`
-  MODIFY `activityId` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `activityId` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `user`

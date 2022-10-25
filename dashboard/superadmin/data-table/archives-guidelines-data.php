@@ -48,11 +48,11 @@ $query .= 'ORDER BY Id ASC ';
 $filter_query = $query . 'LIMIT '.$start.', '.$limit.'';
 
 $statement = $pdoConnect->prepare($query);
-$statement->execute(array(":status" => "active"));
+$statement->execute(array(":status" => "delete"));
 $total_data = $statement->rowCount();
 
 $statement = $pdoConnect->prepare($filter_query);
-$statement->execute(array(":status" => "active"));
+$statement->execute(array(":status" => "delete"));
 $total_filter_data = $statement->rowCount();
 
 if($total_data > 0)
@@ -60,8 +60,8 @@ if($total_data > 0)
 $output = '
 
     <thead>
-    <th>GUIDLINE-ID</th>
-    <th>LIST OF BOXES AND CHECKLISTS</th>
+    <th>GUIDELINE-ID</th>
+    <th>FILES</th>
     <th>ACTION</th>
     </thead>
 ';
@@ -70,8 +70,8 @@ $output = '
     $output .= '
     <tr>
     <td>'.$row["guidelines_Id"].'</td>
-      <td>'.$row["guidelines_name"].'</td>
-      <td><button type="button" class="primary"> <a href="guidelines-data?Id='.$row["Id"].'" class="view">View</a></button></td>
+      <td>'.$row["files"].'</td>
+      <td><button type="button" class="btn-danger btn"> <a href="controller/delete-guidelines-data?Id='.$row["Id"].'&guidelinesID='.$Guidlines_ID.'" class="view">Delete</a></button>
     </tr>
     ';
   }
@@ -213,8 +213,8 @@ $('.view').on('click', function(e){
   const href = $(this).attr('href')
 
         swal({
-        title: "View?",
-        text: "Do you want to view more?",
+        title: "Delete?",
+        text: "Do you want to Delete more?",
         icon: "info",
         buttons: true,
         dangerMode: true,

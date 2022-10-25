@@ -73,7 +73,7 @@ $UId 			= $row['userId'];
         </a>
       </li>
       <li class="login">
-        <a href="authentication/user-signout" class="btn-signout">
+        <a href="authentication/admin-signout" class="btn-signout">
           <span class="links_name login_out">
             Signout
           </span>

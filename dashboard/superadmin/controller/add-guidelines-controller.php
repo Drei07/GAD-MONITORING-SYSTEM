@@ -60,6 +60,8 @@ if(isset($_POST['btn-register'])) {
             Id INT(145) AUTO_INCREMENT PRIMARY KEY,
             userId VARCHAR(125) NULL,
             files VARCHAR(125) NULL,
+            guidelines_Id VARCHAR(125) NULL,
+            status enum('active','delete') NOT NULL DEFAULT 'active',
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
         )";

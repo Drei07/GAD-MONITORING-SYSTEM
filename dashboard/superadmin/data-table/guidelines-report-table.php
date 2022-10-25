@@ -12,6 +12,7 @@ if(!$superadmin_home->is_logged_in())
 }
 
 
+$Guidlines_ID = $_GET['guidelinesID'];
 
 
 function get_total_row($pdoConnect)
@@ -33,7 +34,7 @@ else
 }
 
 $query = "
-SELECT * FROM guidelines WHERE status = :status
+SELECT * FROM guidelines_$Guidlines_ID WHERE status = :status
 ";
 $output = '';
 if($_POST['query'] != '')
@@ -60,8 +61,8 @@ if($total_data > 0)
 $output = '
 
     <thead>
-    <th>GUIDLINE-ID</th>
-    <th>LIST OF BOXES AND CHECKLISTS</th>
+    <th>GUIDELINE-ID</th>
+    <th>FILES</th>
     <th>ACTION</th>
     </thead>
 ';
@@ -70,8 +71,8 @@ $output = '
     $output .= '
     <tr>
     <td>'.$row["guidelines_Id"].'</td>
-      <td>'.$row["guidelines_name"].'</td>
-      <td><button type="button" class="primary"> <a href="guidelines-data?Id='.$row["Id"].'" class="view">View</a></button></td>
+      <td>'.$row["files"].'</td>
+      <td><button type="button" class="btn-danger btn"> <a href="controller/delete-guidelines-data?Id='.$row["Id"].'&guidelinesID='.$Guidlines_ID.'" class="view">Delete</a></button>
     </tr>
     ';
   }
@@ -213,8 +214,8 @@ $('.view').on('click', function(e){
   const href = $(this).attr('href')
 
         swal({
-        title: "View?",
-        text: "Do you want to view more?",
+        title: "Delete?",
+        text: "Do you want to Delete more?",
         icon: "info",
         buttons: true,
         dangerMode: true,

@@ -17,14 +17,16 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $profile_user 	= $row['adminProfile'];
 $UId 			= $row['userId'];
 
-$Guidelines_ID = $_GET['Id'];
 
-$pdoQuery = "SELECT * FROM guidelines WHERE guidelines_Id = :ID";
+$Guidlines_ID = $_GET ['Id'];
+
+$pdoQuery = "SELECT * FROM guidelines WHERE guidelines_Id = :Id";
 $pdoResult = $pdoConnect->prepare($pdoQuery);
-$pdoExec = $pdoResult->execute(array(":ID" => $Guidelines_ID));
-$Guidelines_data = $pdoResult->fetch(PDO::FETCH_ASSOC);
+$pdoExec = $pdoResult->execute(array(":Id" => $Guidlines_ID));
+$guidlines_data = $pdoResult->fetch(PDO::FETCH_ASSOC);
 
-$guidelines_name = $Guidelines_data["guidelines_name"];
+$guidelines_name = $guidlines_data['guidelines_name'];
+$guidelines_file = $guidlines_data['files'];
 
 ?>
 <!DOCTYPE html>
@@ -36,6 +38,7 @@ $guidelines_name = $Guidelines_data["guidelines_name"];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../src/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../src/css/dashboard.css?v=<?php echo time(); ?>">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js" integrity="sha512-MoP2OErV7Mtk4VL893VYBFq8yJHWQtqJxTyIAsCVKzILrvHyKQpAwJf9noILczN6psvXUxTr19T5h+ndywCoVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <title>Guidelines | Add Guidlines</title>
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -81,7 +84,7 @@ $guidelines_name = $Guidelines_data["guidelines_name"];
         </a>
       </li>
       <li class="login">
-        <a href="authentication/user-signout" class="btn-signout">
+        <a href="authentication/admin-signout" class="btn-signout">
           <span class="links_name login_out">
             Signout
           </span>
@@ -112,6 +115,8 @@ $guidelines_name = $Guidelines_data["guidelines_name"];
             <p class="active"> Add</p>
             
         </div>
+        <button type="button" class="primary" data-bs-toggle="modal" data-bs-target="#classModal"><i class='bx bxs-file-pdf'></i> View File</button>
+
     </div>
     <!-- Content -->
     <di v class="details">
@@ -120,14 +125,14 @@ $guidelines_name = $Guidelines_data["guidelines_name"];
           <h2><?php echo $guidelines_name ?></h2>
         </div>
         <div class="card_body">
-            <form action="controller/add-teacher-controller.php" method="POST" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
+            <form action="controller/add-guidlines-controller.php?guidelinesID=<?php echo $Guidlines_ID  ?>" method="POST"  enctype="multipart/form-data" class="row gx-5 needs-validation" name="form" onsubmit="return validate()"  novalidate style="overflow: hidden;">
                 <div class="row gx-5 needs-validation">
 
                     <div class="col-md-12">
-                        <label for="logo" class="form-label">Upload Proof<span> *</span></label>
-                        <input type="file" class="form-control" name="Logo" id="logo" style="height: 33px ;" required>
+                        <label for="files" class="form-label">Upload Proof<span> *</span></label>
+                        <input type="file" class="form-control" name="files" id="files" style="height: 33px ;" required>
                         <div class="invalid-feedback">
-                        Please provide a Logo.
+                        Please provide a proof.
                         </div>
                     </div>
 
@@ -140,9 +145,26 @@ $guidelines_name = $Guidelines_data["guidelines_name"];
         </div>
       </div>
     </div>
+
+       	<!-- MODALS -->
+		<div class="class-modal">
+			<div class="modal fade" id="classModal" tabindex="-1" aria-labelledby="classModalLabel" aria-hidden="true" >
+				<div class="modal-dialog modal-dialog-centered modal-xl">
+					<div class="modal-content">
+						<div class="modal-body">
+                            <div id="pdf-files"></div>
+                            <script>PDFObject.embed("../PDF/<?php echo $guidelines_file ?>", "#pdf-files", {omitInlineStyles: false});</script>
+						</div>
+					</div>
+                    <div class="header"><i class='bx bx-exit-fullscreen' ></i> Click outside to exit.</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- END MODALS -->
   </section>
 
-    <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../src/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../src/node_modules/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../src/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../../src/js/tooltip.js"></script>
